@@ -9,7 +9,6 @@ public class Doctor extends Person {
 		return crm;
 	}
 
-
 	public void setCrm(int crm) {
 		this.crm = crm;
 	}
