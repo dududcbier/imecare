@@ -1,12 +1,17 @@
 package modelo;
+import java.util.Calendar;
 
 public class Person {
 
-	String name = " ";
-	String address = " ";
-	String email = " ";
-	String birthDate = " ";
-	String parentesco = " ";
+	private String name = " ";
+	private String address = " ";
+	private String email = " ";
+	private Calendar birthDate;
+	private String parentesco = " ";
+	private String cpf = " ";
+	private String rg = " ";
+	private int phone[] = new int[15];
+
 	public String getParentesco() {
 		return parentesco;
 	}
@@ -14,11 +19,6 @@ public class Person {
 	public void setParentesco(String parentesco) {
 		this.parentesco = parentesco;
 	}
-
-	int phone[] = new int[15];
-	String rg = " ";
-	private String cpf = " ";
-	private String bloodType = " ";	
 	
 	public String getName() {
 		return name;
@@ -36,11 +36,11 @@ public class Person {
 		this.email = email;
 	}
 	
-	public String getBirthDate() {
+	public Calendar getBirthDate() {
 		return birthDate;
 	}
 	
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
 	
@@ -58,14 +58,6 @@ public class Person {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public String getBloodType() {
-		return bloodType;
-	}
-	
-	public void setBloodType(String bloodType) {
-		this.bloodType = bloodType;
 	}
 
 	public String getAddress() {

@@ -2,9 +2,9 @@ package modelo;
 
 public class Login {
 
-	String user;
-	String email;
-	String password;
+	private String user;
+	private String email;
+	private String password;
 	
 	public String getUser() {
 		return user;

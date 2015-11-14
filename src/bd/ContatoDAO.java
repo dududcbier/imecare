@@ -3,7 +3,7 @@
 package bd;
 
 import java.sql.*;
-
+import java.util.Calendar;
 import modelo.*;
 
 public class ContatoDAO {
@@ -35,7 +35,7 @@ public class ContatoDAO {
 			stmt.setString(1, person.getCpf());
 			stmt.setString(2, person.getRg());
 			stmt.setString(3, person.getName());
-			stmt.setDate(4, java.sql.Date.valueOf(person.getBirthDate()));
+			stmt.setDate(4, new Date(person.getBirthDate().getTimeInMillis()));
 			stmt.setString(5, person.getParentesco());
 			// executa
 			stmt.execute();
@@ -57,7 +57,7 @@ public class ContatoDAO {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, person.getName());
 			stmt.setString(2, person.getRg());
-			stmt.setDate(3, java.sql.Date.valueOf(person.getBirthDate()));
+			stmt.setDate(3, new Date(person.getBirthDate().getTimeInMillis()));
 			stmt.setString(4, person.getParentesco());
 			stmt.setString(5, person.getCpf());
 			stmt.execute();
@@ -82,46 +82,38 @@ public class ContatoDAO {
 			if (rs.next()) {
 				person = new Person();
 
-				String name = " ";
-				String address = " ";
-				String email = " ";
-				String birthDate = " ";
-				String parentesco = " ";
-
-				person.setCpf(rs.getCpf());
+				person.setCpf(rs.getString("cpf"));
 				person.setName(rs.getString("nome"));
 				person.setAddress(rs.getString("endereco"));
 				person.setEmail(rs.getString("email"));
 				person.setParentesco(rs.getString("parentesco"));
-				// person.setBirthDate(rs.getDate()) Comofas?
 
-				// montando a data através do Calendar
-				// Calendar data = Calendar.getInstance();
-				// data.setTime(rs.getDate("dataNascimento"));
-				// person.setDataNascimento(data);
+				Calendar date = Calendar.getInstance();
+				date.setTime(rs.getDate("dt_nascimento"));
+				person.setBirthDate(date);
+
 			}
 			rs.close();
 			stmt.close();
 			return person;
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
 	}
 
 	public void removeUser(Person person) {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from pessoa where cpf=?");
-			stmt.setLong(1, person.getCpf());
+			stmt.setString(1, person.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 
-		removeEmail(Person person);
+		// removeEmail(person);
 	}
 	
 	public void addEmail(Person person){
@@ -168,7 +160,7 @@ public class ContatoDAO {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from email where cpf=?");
-			stmt.setLong(1, person.getCpf());
+			stmt.setString(1, person.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -219,7 +211,7 @@ public class ContatoDAO {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from medico where cpf=?");
-			stmt.setLong(1, doctor.getCpf());
+			stmt.setString(1, doctor.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -240,7 +232,7 @@ public class ContatoDAO {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, paciente.getCpf());	
 			stmt.setString(2, paciente.getName());	
-			stmt.setString(3, paciente.getTipoSanguineo());			
+			stmt.setString(3, paciente.getBloodType());			
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -258,7 +250,7 @@ public class ContatoDAO {
 		String sql = "update paciente set tipo=?, nome=? where cpf=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, paciente.getTipoSanguineo());
+			stmt.setString(1, paciente.getBloodType());
 			stmt.setString(2, paciente.getName());
 			stmt.setString(3, paciente.getCpf());
 			stmt.execute();
@@ -274,14 +266,14 @@ public class ContatoDAO {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from paciente where cpf=?");
-			stmt.setLong(1, paciente.getCpf());
+			stmt.setString(1, paciente.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 
-		removeUser(doctor);
+		removeUser(paciente);
 	}
 
 	public void addMedicine(Medicine medicine){
@@ -322,14 +314,12 @@ public class ContatoDAO {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from medicamento where nome=?");
-			stmt.setLong(1, medicine.getName());
+			stmt.setString(1, medicine.getName());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		removeUser(doctor);
 	}
 
 	public void addDoenca(Doenca doenca){
@@ -354,14 +344,12 @@ public class ContatoDAO {
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from medicamento where cid=?");
-			stmt.setLong(1, doenca.getCid());
+			stmt.setString(1, doenca.getCid());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		removeUser(doctor);
 	}
 
 	public void cleanTable(String table){
@@ -375,6 +363,8 @@ public class ContatoDAO {
 			throw new RuntimeException(e);
 		}	
 	}
+
+}
 
 //	public void remove(Contato contato) {
 //		try {
@@ -447,5 +437,3 @@ public class ContatoDAO {
 //			throw new RuntimeException(e);
 //		}
 //	}
-
-}

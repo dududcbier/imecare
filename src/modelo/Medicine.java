@@ -2,9 +2,9 @@ package modelo;
 
 public class Medicine {
 
-	String substances[] = new String[40];
-	String tarja;
-	String name;
+	private String substances[] = new String[40];
+	private String tarja;
+	private String name;
 		
 	public String getTarja() {
 		return tarja;

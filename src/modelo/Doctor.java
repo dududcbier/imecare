@@ -2,8 +2,8 @@ package modelo;
 
 public class Doctor extends Person {
 	
-	Integer crm;
-	String especialidade;
+	private Integer crm;
+	private String especialidade;
 	
 	public Integer getCrm() {
 		return crm;

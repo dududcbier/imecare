@@ -2,14 +2,14 @@ package modelo;
 
 public class Paciente extends Person {
 	
-	String tipoSanguineo;
+	private String bloodType;
 
-	public String getTipoSanguineo() {
-		return tipoSanguineo;
+	public String getBloodType() {
+		return bloodType;
 	}
 
-	public void setTipoSanguineo(String tipoSanguineo) {
-		this.tipoSanguineo = tipoSanguineo;
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
 	}
 	
 	public void confirmConsultation(){

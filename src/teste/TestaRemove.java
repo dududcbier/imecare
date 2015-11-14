@@ -6,6 +6,19 @@ import modelo.*;
 
 public class TestaRemove {
 	public static void main(String[] args) throws SQLException{
+		
+		Person person = new Person();
+		person.setCpf("10987654321");
+
+		ContatoDAO dao = new ContatoDAO();
+		 		 		 
+		dao.removeUser(person);
+			 
+		System.out.println("Contato foi removido com sucesso!");
+		
+	}
+}
+
 //		 int  id = 1; 
 //		
 //		 ContatoDAO dao = new ContatoDAO();

@@ -2,8 +2,8 @@ package modelo;
 
 public class Doenca {
 
-	String cid = " ";
-	String name = " ";
+	private String cid = " ";
+	private String name = " ";
 
 	public String getCid(){
 		return cid;

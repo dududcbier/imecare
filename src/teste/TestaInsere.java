@@ -1,6 +1,7 @@
 package teste;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import bd.ContatoDAO;
 import modelo.*;
 
@@ -11,7 +12,7 @@ public class TestaInsere {
 		person.setName("MAC439");
 		person.setEmail("mac439@ime.usp.br");
 		person.setAddress("R. do Matão, 1010");
-		person.setBirthDate("2013-09-04");
+		person.setBirthDate(Calendar.getInstance());
 		person.setRg("11111111");
 		person.setCpf("22222222222");
 		person.setParentesco("BFF");
@@ -20,7 +21,7 @@ public class TestaInsere {
 		doctor.setName("Médico");
 		doctor.setEmail("medico@medico.com.br");
 		doctor.setAddress("Rua dos médicos, 123");
-		doctor.setBirthDate("2013-09-04");
+		doctor.setBirthDate(Calendar.getInstance());
 		doctor.setRg("123456789");
 		doctor.setCpf("12345678901");
 		doctor.setParentesco(" ");
@@ -31,11 +32,11 @@ public class TestaInsere {
 		paciente.setName("Paciente");
 		paciente.setEmail("paciente@paciente.com.br");
 		paciente.setAddress("Rua dos pacientes, 123");
-		paciente.setBirthDate("2013-09-04");
+		paciente.setBirthDate(Calendar.getInstance());
 		paciente.setRg("987654321");
 		paciente.setCpf("10987654321");
 		paciente.setParentesco(" ");
-		paciente.setTipoSanguineo("O+");
+		paciente.setBloodType("O+");
 
 		Medicine medicine = new Medicine();
 		medicine.setName("Tylenol");
