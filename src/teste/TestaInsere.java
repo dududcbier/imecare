@@ -55,6 +55,23 @@ public class TestaInsere {
 	    exam.setDescription("Técnica que permite determinar propriedades de uma substância");
 	    exam.setAnvisaCode(1);
 
+        Records record = new Records();
+	    record.setType("A+");
+	    record.setNamePatient("João da Silva");
+	    record.setCpf("12343123467");
+	    record.setCid("31421");
+		record.setDiseaseName("Diabetes");
+		record.setSymptonName("Sede");
+		record.setSymptonDescription("Sensação constante de sede");
+		record.setMedicineName("Insulon");
+		record.setMedicalStripe("vermelha");
+		record.setAnvisaCode(2353);
+		record.setExamName("Exame de sangue");
+		record.setExamDescription("Será analisada a taxa de glicemia no sangue");
+
+
+
+
 		// grave nessa conexão!!!
 		ContatoDAO dao = new ContatoDAO();
 		 
@@ -79,6 +96,10 @@ public class TestaInsere {
 
 		dao.addExam(exam);
 		System.out.println("Novo exame gravado com sucesso!");
+
+        dao.listRecord();
+		System.out.println("Prontuário mostrado com sucesso!");
+
 
 	}
 }
