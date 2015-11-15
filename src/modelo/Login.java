@@ -55,7 +55,7 @@ public class Login {
 	
 	
 	
-	public void checksAcess(String name, String type) {
+	/*public void checksAccess(String name, String type) {
 		
 		
 		switch (type) {
@@ -75,8 +75,7 @@ public class Login {
 			
 		
 		
-		
-	}
+	}*/
 	
 	
 	

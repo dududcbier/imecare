@@ -46,6 +46,10 @@ public class TestaInsere {
 		doenca.setName("Ebola");
 	    doenca.setCid("4224");
 
+	    Sympton sympton = new Sympton();
+		sympton.setName("Febre");
+	    sympton.setDescription("A temperatura chegou a 39 graus");
+
 		// grave nessa conexão!!!
 		ContatoDAO dao = new ContatoDAO();
 		 
@@ -64,6 +68,9 @@ public class TestaInsere {
 
 		dao.addDoenca(doenca);
 		System.out.println("Nova doenca gravado com sucesso!");
+
+		dao.addSympton(sympton);
+		System.out.println("Novo sintoma gravado com sucesso!");
 
 	}
 }
