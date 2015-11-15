@@ -50,6 +50,11 @@ public class TestaInsere {
 		sympton.setName("Febre");
 	    sympton.setDescription("A temperatura chegou a 39 graus");
 
+	    Exam exam = new Exam();
+	    exam.setName("Ressonância Magnética");
+	    exam.setDescription("Técnica que permite determinar propriedades de uma substância");
+	    exam.setAnvisaCode(1);
+
 		// grave nessa conexão!!!
 		ContatoDAO dao = new ContatoDAO();
 		 
@@ -71,6 +76,9 @@ public class TestaInsere {
 
 		dao.addSympton(sympton);
 		System.out.println("Novo sintoma gravado com sucesso!");
+
+		dao.addExam(exam);
+		System.out.println("Novo exame gravado com sucesso!");
 
 	}
 }

@@ -12,5 +12,7 @@ public class TestaClean {
 		dao.cleanTable("email");
 		dao.cleanTable("medicamento");
 		dao.cleanTable("doenca");
+		dao.cleanTable("sintoma");
+		dao.cleanTable("procedimento");
 	}
 }

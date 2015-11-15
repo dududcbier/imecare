@@ -43,6 +43,11 @@ public class TestaAltera {
 		medicine.setName("Tylenol");
 		medicine.setTarja("Vermelha");
 
+		Exam exam = new Exam();
+		exam.setName("Raio X");
+		exam.setAnvisaCode(1);
+		exam.setDescription("Raios x");
+
 		ContatoDAO dao = new ContatoDAO();
 
 		dao.updateUser(person);
@@ -56,6 +61,10 @@ public class TestaAltera {
 
 		dao.updateMedicine(medicine);
 		System.out.println("Novo medicamento alterado com sucesso!");
+
+		dao.updateExam(exam);
+		System.out.println("Novo exame alterado com sucesso!");
+
 
 	}
 }

@@ -82,7 +82,7 @@ public class ContatoDAO {
 			if (rs.next()) {
 				person = new Person();
 
-				person.setCpf(rs.getString("cpf"));
+				person.setCpf(cpf);
 				person.setName(rs.getString("nome"));
 				person.setAddress(rs.getString("endereco"));
 				person.setEmail(rs.getString("email"));
@@ -430,8 +430,83 @@ public class ContatoDAO {
 
 	}
 
+	public void addExam(Exam exam){
+		String sql = "insert into procedimento "
+				+ "(codigo_anvisa,nome,descricao)" + " values (?,?,?)";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
 
-    public void cleanTable(String table){
+			stmt.setInt(1, exam.getAnvisaCode());
+			stmt.setString(2, exam.getName());
+			stmt.setString(3, exam.getDescription());
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}	
+	}
+
+	public void updateExam(Exam exam){
+
+		String sql = "update procedimento set nome=?, descricao=? where codigo_anvisa=?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, exam.getName());
+			stmt.setString(2, exam.getDescription());
+			stmt.setInt(3, exam.getAnvisaCode());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public void removeExam(Exam exam){
+
+		try {
+			PreparedStatement stmt = conexao.prepareStatement("delete "
+					+ "from procedimento where codigo_anvisa=?");
+			stmt.setInt(1, exam.getAnvisaCode());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public Exam getExam(Integer code){
+
+		try {
+			Exam exam = null;
+			
+			PreparedStatement stmt = conexao.prepareStatement("select * "
+					+ "from procedimento where codigo_anvisa=?");
+			stmt.setInt(1, code);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				exam = new Exam();
+
+				exam.setName(rs.getString("nome"));
+				exam.setDescription(rs.getString("descricao"));
+				exam.setAnvisaCode(code);
+				
+
+			}
+			rs.close();
+			stmt.close();
+			return exam;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void cleanTable(String table){
 		String sql = "delete from " + table;
 
 		try {

@@ -9,7 +9,7 @@ public class FabricaDeConexao {
 
 	public static final String NOME_DRIVER = "org.postgresql.Driver";
 	public static final String URL_BD = "jdbc:postgresql://localhost:5432/imecare";
-	public static final String USUARIO_BD = "postgres";
+	public static final String USUARIO_BD = "dududcbier";
 	public static final String SENHA_BD = "";
 
 	private static FabricaDeConexao fabricaDeConexao = null;
