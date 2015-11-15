@@ -1,0 +1,15 @@
+package bd;
+
+import java.sql.Connection;
+
+public class User {
+	
+	private Connection conexao;
+	 
+	public AddUserDao() {
+		this.conexao = ConnectionFactory.obterInstancia().obterConexao();
+	}
+		
+	
+	
+}
