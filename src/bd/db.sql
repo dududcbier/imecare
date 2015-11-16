@@ -87,7 +87,7 @@ CPF_Paciente CHAR(11),
 data DATE,
 horario TIME,
 PRIMARY KEY(CPF_Medico, CPF_Paciente, Data, Horario,CID),
-FOREIGN KEY (CPF_Paciente, CPF_Medico, data, horario) REFERENCES Atendimento(CPF_Paciente, CPF_Medico, data, horario) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (CPF_Paciente, CPF_Medico, data, horario) REFERENCES Atendimento(CPF_Paciente, CPF_Medico, data, horario) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (CID) REFERENCES Doenca(CID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -144,7 +144,7 @@ CPF_Paciente CHAR(11),
 data DATE,
 horario TIME,
 PRIMARY KEY(CPF_Medico, CPF_Paciente, Data, Horario),
-FOREIGN KEY (CPF_Paciente, CPF_Medico, data, horario ) REFERENCES Atendimento(CPF_Paciente, CPF_Medico, data, horario) ON DELETE RESTRICT ON UPDATE CASCADE
+FOREIGN KEY (CPF_Paciente, CPF_Medico, data, horario ) REFERENCES Atendimento(CPF_Paciente, CPF_Medico, data, horario) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Prescreve(
@@ -157,13 +157,13 @@ dose char(15),
 periodo TIME,
 frequencia char(30),
 PRIMARY KEY(CPF_Medico, CPF_Paciente, Data, Horario, nome_medicamento),
-FOREIGN KEY (CPF_Paciente, CPF_Medico, data, horario ) REFERENCES Atendimento(CPF_Paciente, CPF_Medico, data, horario) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (CPF_Paciente, CPF_Medico, data, horario ) REFERENCES Atendimento(CPF_Paciente, CPF_Medico, data, horario) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (nome_medicamento) REFERENCES Medicamento(nome) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE VIEW prontuario AS
 SELECT  p.*, d.CID, d.nome AS nome_doenca, s.nome AS nome_sintoma, s.descricao AS descricao_sintoma, 
-        m.nome AS nome_medicamento, m.tarja, e.codigo_anvisa, e.nome AS nome_exame, e.descricao 
+        m.nome AS nome_medicamento, m.tarja, e.codigo_anvisa, e.nome AS nome_exame, e.descricao AS descricao_exame
 FROM Paciente p, Doenca d, Doenca_Diagnosticada dd, Possui po, Sintoma s, Prescreve pr, Medicamento m, Realiza r, Exame e
 WHERE p.cpf = dd.CPF_Paciente AND dd.CID = d.CID AND  d.CID = po.CID AND po.nome_sintoma = s.nome
       AND m.nome = pr.nome_medicamento AND p.cpf= pr.CPF_Paciente AND p.cpf = r.cpf_paciente AND r.codigo_anvisa = e.codigo_anvisa;

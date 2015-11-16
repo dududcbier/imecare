@@ -513,8 +513,7 @@ public class ContatoDAO {
 			while (rs.next()) {
 				// criando o objeto Contato
 				Records record1 = new Records();
-				record1.setType(rs.getString("tipo"));
-				record1.setNamePatient(rs.getString("nome"));
+				record1.setType(rs.getString("tipo_sanguineo"));
 				record1.setCpf(rs.getString("cpf"));
 				record1.setCid(rs.getString("CID"));
 				record1.setDiseaseName(rs.getString("nome_doenca"));

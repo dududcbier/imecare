@@ -1,7 +1,7 @@
 package teste;
 
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.util.*;
 import bd.ContatoDAO;
 import modelo.*;
 
@@ -103,8 +103,15 @@ public class TestaInsere {
 		System.out.println("Novo schedule gravado com sucesso!");
 
 
-        dao.listRecord();
+        List<Records> someList = new ArrayList<Records>();
+        someList = dao.listRecord();
+        for(Iterator<Records> i = someList.iterator(); i.hasNext();) {
+  			Records item = i.next();
+  			System.out.println(item);
+        }
 		System.out.println("Prontuário mostrado com sucesso!");
+		System.out.println("Prontuário mostrado com sucesso!");
+
 
 
 	}
