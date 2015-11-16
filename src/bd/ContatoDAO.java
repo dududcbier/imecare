@@ -5,6 +5,8 @@ package bd;
 import java.sql.*;
 import java.util.Calendar;
 import modelo.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ContatoDAO {
 
@@ -24,7 +26,7 @@ public class ContatoDAO {
 
 	public void addUser(Person person){
 		String sql = "insert into pessoa "
-				+ "(cpf,rg,	nome, dt_nascimento,parentesco)" + " values (?,?,?,?,?)";
+				+ "(cpf,rg,	nome, dt_nascimento)" + " values (?,?,?,?)";
 		
 		try {
 			// prepared statement para inserção
@@ -36,7 +38,6 @@ public class ContatoDAO {
 			stmt.setString(2, person.getRg());
 			stmt.setString(3, person.getName());
 			stmt.setDate(4, new Date(person.getBirthDate().getTimeInMillis()));
-			stmt.setString(5, person.getParentesco());
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -51,15 +52,14 @@ public class ContatoDAO {
 
 	public void updateUser(Person person){
 
-		String sql = "update pessoa set nome=?, rg=?, dt_nascimento=?, parentesco=?"
+		String sql = "update pessoa set nome=?, rg=?, dt_nascimento=?"
 				+ " where cpf=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, person.getName());
 			stmt.setString(2, person.getRg());
 			stmt.setDate(3, new Date(person.getBirthDate().getTimeInMillis()));
-			stmt.setString(4, person.getParentesco());
-			stmt.setString(5, person.getCpf());
+			stmt.setString(4, person.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -86,7 +86,6 @@ public class ContatoDAO {
 				person.setName(rs.getString("nome"));
 				person.setAddress(rs.getString("endereco"));
 				person.setEmail(rs.getString("email"));
-				person.setParentesco(rs.getString("parentesco"));
 
 				Calendar date = Calendar.getInstance();
 				date.setTime(rs.getDate("dt_nascimento"));
@@ -112,13 +111,11 @@ public class ContatoDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		// removeEmail(person);
 	}
 	
 	public void addEmail(Person person){
 		String sql = "insert into email "
-				+ "(cpf,nome,email)" + " values (?,?,?)";
+				+ "(cpf,email)" + " values (?,?)";
 		
 		try {
 			// prepared statement para inserção
@@ -127,8 +124,7 @@ public class ContatoDAO {
 			// seta os valores
 
 			stmt.setString(1, person.getCpf());
-			stmt.setString(2, person.getName());
-			stmt.setString(3, person.getEmail());
+			stmt.setString(2, person.getEmail());
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -173,14 +169,14 @@ public class ContatoDAO {
 		addUser(doctor);
 
 		String sql = "insert into medico "
-				+ "(crm, cpf, nome)" + " values (" + doctor.getCrm() + ",?,?)";
+				+ "(crm, cpf)" + " values (?,?)";
 		
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = conexao.prepareStatement(sql);			
 			// executa
-			stmt.setString(1, doctor.getCpf());
-			stmt.setString(2, doctor.getName());
+			stmt.setInt(1, doctor.getCrm());
+			stmt.setString(2, doctor.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -193,10 +189,10 @@ public class ContatoDAO {
 
 		updateUser(doctor);
 
-		String sql = "update medico set crm=" + doctor.getCrm() + ", nome=? where cpf=?";
+		String sql = "update medico set crm=? where cpf=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, doctor.getName());
+			stmt.setInt(1, doctor.getCrm());
 			stmt.setString(2, doctor.getCpf());
 			stmt.execute();
 			stmt.close();
@@ -223,7 +219,7 @@ public class ContatoDAO {
 
 	public void addPaciente(Paciente paciente){
 		String sql = "insert into paciente "
-				+ "(cpf, nome, tipo)" + " values (?,?,?)";
+				+ "(cpf, tipo_sanguineo)" + " values (?,?)";
 		
 		addUser(paciente);	
 
@@ -231,8 +227,7 @@ public class ContatoDAO {
 			// prepared statement para inserção
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, paciente.getCpf());	
-			stmt.setString(2, paciente.getName());	
-			stmt.setString(3, paciente.getBloodType());			
+			stmt.setString(2, paciente.getBloodType());			
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -247,12 +242,11 @@ public class ContatoDAO {
 
 		updateUser(paciente);
 
-		String sql = "update paciente set tipo=?, nome=? where cpf=?";
+		String sql = "update paciente set tipo_sanguineo=? where cpf=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, paciente.getBloodType());
-			stmt.setString(2, paciente.getName());
-			stmt.setString(3, paciente.getCpf());
+			stmt.setString(2, paciente.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -431,7 +425,7 @@ public class ContatoDAO {
 	}
 
 	public void addExam(Exam exam){
-		String sql = "insert into procedimento "
+		String sql = "insert into exame "
 				+ "(codigo_anvisa,nome,descricao)" + " values (?,?,?)";
 		
 		try {
@@ -450,7 +444,7 @@ public class ContatoDAO {
 
 	public void updateExam(Exam exam){
 
-		String sql = "update procedimento set nome=?, descricao=? where codigo_anvisa=?";
+		String sql = "update exame set nome=?, descricao=? where codigo_anvisa=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, exam.getName());
@@ -468,7 +462,7 @@ public class ContatoDAO {
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
-					+ "from procedimento where codigo_anvisa=?");
+					+ "from exame where codigo_anvisa=?");
 			stmt.setInt(1, exam.getAnvisaCode());
 			stmt.execute();
 			stmt.close();
@@ -484,7 +478,7 @@ public class ContatoDAO {
 			Exam exam = null;
 			
 			PreparedStatement stmt = conexao.prepareStatement("select * "
-					+ "from procedimento where codigo_anvisa=?");
+					+ "from exame where codigo_anvisa=?");
 			stmt.setInt(1, code);
 			ResultSet rs = stmt.executeQuery();
 
@@ -543,8 +537,6 @@ public class ContatoDAO {
 		}
 	}
 
-
-
 	public void cleanTable(String table){
 		String sql = "delete from " + table;
 
@@ -557,6 +549,76 @@ public class ContatoDAO {
 		}	
 	}
 
+	public void addSchedule(Schedule schedule){
+
+		String sql = "insert into atendimento "
+				+ "(CPF_Medico, CPF_Paciente, data, horario, tipo_atendimento, comentario)"
+				+ " values (?,?,?,?,?,?)";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+
+			stmt.setString(1, schedule.getDoctorCpf());
+			stmt.setString(2, schedule.getPacienteCpf());
+			stmt.setDate(3, new Date(schedule.getDateTime().getTimeInMillis()));
+			stmt.setTime(4, new Time(schedule.getDateTime().getTimeInMillis()));
+			stmt.setString(5, schedule.getType());
+			stmt.setString(6, schedule.getComment());
+
+			// executa
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// A SQLException é "encapsulada" em uma RuntimeException
+			// para desacoplar o código da API de JDBC
+			throw new RuntimeException(e);
+		}	
+			
+	}
+
+	public void updateSchedule(Schedule schedule){
+
+
+		String sql = "update atendimento set data=? horario=? tipo_atendimento=? comentario=?"
+					+ "where CPF_Paciente=? CPF_Medico=?";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+
+			stmt.setDate(1, new Date(schedule.getDateTime().getTimeInMillis()));
+			stmt.setTime(2, new Time(schedule.getDateTime().getTimeInMillis()));
+			stmt.setString(3, schedule.getType());
+			stmt.setString(4, schedule.getComment());
+			stmt.setString(5, schedule.getDoctorCpf());
+			stmt.setString(6, schedule.getPacienteCpf());
+
+			// executa
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// A SQLException é "encapsulada" em uma RuntimeException
+			// para desacoplar o código da API de JDBC
+			throw new RuntimeException(e);
+		}	
+			
+	}
+
+	public void removeSchedule(Schedule schedule){
+
+		try {
+			PreparedStatement stmt = conexao.prepareStatement("delete "
+					+ "from exame where CPF_Paciente=? and CPF_Medico=? and data=? and hora=?");
+			stmt.setString(1, schedule.getPacienteCpf());
+			stmt.setString(2, schedule.getDoctorCpf());
+			stmt.setDate(3, new Date(schedule.getDateTime().getTimeInMillis()));
+			stmt.setTime(4, new Time(schedule.getDateTime().getTimeInMillis()));
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 
 }
 

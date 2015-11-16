@@ -16,7 +16,6 @@ public class TestaAltera {
 		person.setBirthDate(Calendar.getInstance());
 		person.setRg("11111111");
 		person.setCpf("22222222222");
-		person.setParentesco("BFF");
 
 		Doctor doctor = new Doctor();
 		doctor.setName("Mééééééédico");
@@ -25,7 +24,6 @@ public class TestaAltera {
 		doctor.setBirthDate(Calendar.getInstance());
 		doctor.setRg("123456789");
 		doctor.setCpf("12345678901");
-		doctor.setParentesco(" ");
 		doctor.setCrm(5464);
 		doctor.setEspecialidade("Neurologista");
 
@@ -36,7 +34,6 @@ public class TestaAltera {
 		paciente.setBirthDate(Calendar.getInstance());
 		paciente.setRg("987654321");
 		paciente.setCpf("10987654321");
-		paciente.setParentesco(" ");
 		paciente.setBloodType("A+");
 
 		Medicine medicine = new Medicine();

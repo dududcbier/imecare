@@ -15,7 +15,6 @@ public class TestaInsere {
 		person.setBirthDate(Calendar.getInstance());
 		person.setRg("11111111");
 		person.setCpf("22222222222");
-		person.setParentesco("BFF");
 		
 		Doctor doctor = new Doctor();
 		doctor.setName("Médico");
@@ -24,7 +23,6 @@ public class TestaInsere {
 		doctor.setBirthDate(Calendar.getInstance());
 		doctor.setRg("123456789");
 		doctor.setCpf("12345678901");
-		doctor.setParentesco(" ");
 		doctor.setCrm(43436);
 		doctor.setEspecialidade("Neurologista");
 
@@ -35,7 +33,6 @@ public class TestaInsere {
 		paciente.setBirthDate(Calendar.getInstance());
 		paciente.setRg("987654321");
 		paciente.setCpf("10987654321");
-		paciente.setParentesco(" ");
 		paciente.setBloodType("O+");
 
 		Medicine medicine = new Medicine();
@@ -69,7 +66,12 @@ public class TestaInsere {
 		record.setExamName("Exame de sangue");
 		record.setExamDescription("Será analisada a taxa de glicemia no sangue");
 
-
+		Schedule sched = new Schedule();
+		sched.setDoctorCpf("12345678901");
+		sched.setPacienteCpf("10987654321");
+		sched.setDateTime(Calendar.getInstance());
+		sched.setType("refazer");
+		sched.setComment("Simpático");
 
 
 		// grave nessa conexão!!!
@@ -96,6 +98,10 @@ public class TestaInsere {
 
 		dao.addExam(exam);
 		System.out.println("Novo exame gravado com sucesso!");
+
+		dao.addSchedule(sched);
+		System.out.println("Novo schedule gravado com sucesso!");
+
 
         dao.listRecord();
 		System.out.println("Prontuário mostrado com sucesso!");

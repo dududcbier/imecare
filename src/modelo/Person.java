@@ -7,18 +7,9 @@ public class Person {
 	private String address = " ";
 	private String email = " ";
 	private Calendar birthDate;
-	private String parentesco = " ";
 	private String cpf = " ";
 	private String rg = " ";
 	private int phone[] = new int[15];
-
-	public String getParentesco() {
-		return parentesco;
-	}
-
-	public void setParentesco(String parentesco) {
-		this.parentesco = parentesco;
-	}
 	
 	public String getName() {
 		return name;
