@@ -138,4 +138,13 @@ public class Records {
 		this.examDescription = examDescription;
 	}
 
+
+	public String toString(){
+         
+		return 
+		"Tipo_sanguíneo: " + getType() + "\nNome paciente: " + getNamePatient() + "\nCPF: " + getCpf() 
+		+ "\nCid: " +  getCid() + "\nDoença: " +  getDiseaseName() + "\nSintoma: " +  getSymptonName() + "\nDescrição do sintoma: " + 
+		getSymptonDescription() + "\nNome do medicamento: " + getMedicineName() + "\nTarja: " +  getMedicalStripe() + 
+		"\nCódigo anvisa: " +  getAnvisaCode() + "\nNome do exame: " +  getExamName() + "\nDescrição do exame: " +  getExamDescription();
+	}
 }
