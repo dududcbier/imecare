@@ -14,7 +14,7 @@ public class DoctorDao {
 	
 	public void addDoctor(Doctor doctor){
 		
-		UserDao.addUser(doctor);
+		PersonDao.addUser(doctor);
 
 		String sql = "insert into medico "
 				+ "(crm, cpf, nome)" + " values (" + doctor.getCrm() + ",?,?)";

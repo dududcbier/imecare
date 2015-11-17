@@ -2,15 +2,15 @@ package modelo;
 
 public class Exam {
 
-	private Integer anvisaCode = -1;
+	private int anvisaCode = -1;
 	private String name = " ";
 	private String description = " ";
 
-	public Integer getAnvisaCode(){
+	public int getAnvisaCode(){
 		return anvisaCode;
 	}
 
-	public void setAnvisaCode(Integer code){
+	public void setAnvisaCode(int code){
 		this.anvisaCode = code;
 	}
 

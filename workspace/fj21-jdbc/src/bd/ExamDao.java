@@ -57,33 +57,31 @@ public class ExamDao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
 
-		public Exam getExam(Integer code){
+	public Exam getExam(int code) {
 
-			try {
-				Exam exam = null;
+		try {
+			Exam exam = new Exam();
 				
-				PreparedStatement stmt = conexao.prepareStatement("select * "
-						+ "from procedimento where codigo_anvisa=?");
-				stmt.setInt(1, code);
-				ResultSet rs = stmt.executeQuery();
+			PreparedStatement stmt = conexao.prepareStatement("select * "
+					+ "from procedimento where codigo_anvisa=?");
+			stmt.setInt(1, code);
+			ResultSet rs = stmt.executeQuery();
 
-				if (rs.next()) {
-					exam = new Exam();
+			if (rs.next()) {
+				//exam = new Exam();
+				exam.setName(rs.getString("nome"));
+				exam.setDescription(rs.getString("descricao"));
+				exam.setAnvisaCode(code);					
+			}
+			rs.close();
+			stmt.close();
+			return exam;
 
-					exam.setName(rs.getString("nome"));
-					exam.setDescription(rs.getString("descricao"));
-					exam.setAnvisaCode(code);
-					
-
-				}
-				rs.close();
-				stmt.close();
-				return exam;
-
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 			}
 		}
-	}
+
 }

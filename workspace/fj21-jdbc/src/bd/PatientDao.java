@@ -3,6 +3,7 @@ package bd;
 import java.sql.*;
 
 import modelo.Patient;
+import modelo.Person;
 
 //Obs: Pacientes podiam ter alergias
 public class PatientDao {
