@@ -3,7 +3,6 @@ package bd;
 import java.sql.*;
 
 import modelo.Doctor;
-import bd.PersonDao;
 
 public class DoctorDao {
 
@@ -15,9 +14,7 @@ public class DoctorDao {
 	
 	public void addDoctor(Doctor doctor){
 		
-		PersonDao person = new PersonDao();
-				
-		person.addUser(doctor);
+		PersonDao.addUser(doctor);
 
 		String sql = "insert into medico "
 				+ "(crm, cpf, nome)" + " values (" + doctor.getCrm() + ",?,?)";
@@ -38,10 +35,7 @@ public class DoctorDao {
 
 	public void updateDoctor(Doctor doctor){
 
-		
-		PersonDao person = new PersonDao();
-		
-		person.updateUser(doctor);
+		updateUser(doctor);
 
 		String sql = "update medico set crm=" + doctor.getCrm() + ", nome=? where cpf=?";
 		try {
@@ -58,8 +52,6 @@ public class DoctorDao {
 
 	public void removeDoctor(Doctor doctor) {
 
-		PersonDao person = new PersonDao();
-		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from medico where cpf=?");
@@ -70,7 +62,7 @@ public class DoctorDao {
 			throw new RuntimeException(e);
 		}
 
-		person.removeUser(doctor);
+		removeUser(doctor);
 	}
 	
 }

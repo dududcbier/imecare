@@ -3,7 +3,7 @@ package bd;
 import java.sql.*;
 
 import modelo.Patient;
-import bd.PersonDao;
+import modelo.Person;
 
 //Obs: Pacientes podiam ter alergias
 public class PatientDao {
@@ -16,7 +16,7 @@ public class PatientDao {
 	
 	public void updatePaciente(Patient paciente){
 
-		PersonDao person = new PersonDao();
+		Person person = new Person();
 		
 		person.updateUser(paciente);
 
@@ -35,8 +35,6 @@ public class PatientDao {
 	
 	public void removePaciente(Patient paciente) {
 
-        PersonDao person = new PersonDao();
-			
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from paciente where cpf=?");
@@ -47,7 +45,7 @@ public class PatientDao {
 			throw new RuntimeException(e);
 		}
 
-		person.removeUser(paciente);
+		removeUser(paciente);
 	}
 	
 }

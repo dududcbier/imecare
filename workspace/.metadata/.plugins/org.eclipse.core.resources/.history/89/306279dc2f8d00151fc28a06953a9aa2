@@ -3,22 +3,16 @@ package bd;
 import java.sql.*;
 import java.util.*;
 
-import modelo.Patient;
-import modelo.Records;
 
+
+import modelo.Person;
 
 public class RecordsDao {
 
-	 private Connection conexao;
-	 
-	 public RecordsDao() {
-		this.conexao = ConnectionFactory.obterInstancia().obterConexao();
-	 }
-	 
-	 public List<Records> listRecord() {
+
+	public List<Records> listRecord() {
 			
-	
-		 try {
+			try {
 				List<Records> record = new ArrayList<Records>();
 				PreparedStatement stmt = this.conexao
 						.prepareStatement("select * from prontuario");

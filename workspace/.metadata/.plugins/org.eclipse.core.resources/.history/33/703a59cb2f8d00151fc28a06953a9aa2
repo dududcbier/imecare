@@ -3,6 +3,7 @@ package bd;
 import java.sql.*;
 
 import modelo.Doctor;
+import modelo.Person;
 import bd.PersonDao;
 
 public class DoctorDao {
@@ -58,8 +59,6 @@ public class DoctorDao {
 
 	public void removeDoctor(Doctor doctor) {
 
-		PersonDao person = new PersonDao();
-		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
 					+ "from medico where cpf=?");
@@ -70,7 +69,7 @@ public class DoctorDao {
 			throw new RuntimeException(e);
 		}
 
-		person.removeUser(doctor);
+		removeUser(doctor);
 	}
 	
 }

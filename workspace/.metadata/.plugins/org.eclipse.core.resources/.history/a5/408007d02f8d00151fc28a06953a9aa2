@@ -3,6 +3,7 @@ package bd;
 import java.sql.*;
 
 import modelo.Doctor;
+import modelo.Person;
 import bd.PersonDao;
 
 public class DoctorDao {

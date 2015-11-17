@@ -1,6 +1,6 @@
 package modelo;
 
-public class Patient extends Person {
+public class Patient {
 	private String bloodType;
 	private String cpf;
 	private String name;
