@@ -15,7 +15,7 @@ public class PrescreveDao {
 
 	
 	
-	public void addPossui(Prescreve prescreve){
+	public void addPrescreve(Prescreve prescreve){
 		String sql = "insert into prescreve "
 				+ "(nome_medicamento, CPF_Medico, CRM, CPF_Paciente, " +
 				"nome_Medico, nome_Paciente, data, horario, dose, periodo, frequencia)" + 

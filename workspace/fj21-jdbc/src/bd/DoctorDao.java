@@ -3,6 +3,7 @@ package bd;
 import java.sql.*;
 
 import modelo.Doctor;
+import modelo.Person;
 import bd.PersonDao;
 
 public class DoctorDao {
@@ -71,6 +72,39 @@ public class DoctorDao {
 		}
 
 		person.removeUser(doctor);
+	}
+
+	public Doctor getDoctor(String cpf){
+
+		try {
+			PersonDao personDao = new PersonDao();
+			Person person = personDao.getUser(cpf);
+			Doctor doctor = null;
+			
+			PreparedStatement stmt = conexao.prepareStatement("select * "
+					+ "from doctor where cpf=?");
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				doctor = new Doctor();
+
+				doctor.setCrm(rs.getInt("crm"));
+				doctor.setEspecialidade(rs.getString("especialidade"));
+				doctor.setName(person.getName());
+				doctor.setRg(person.getRg());
+				doctor.setCpf(person.getCpf());
+				doctor.setBirthDate(person.getBirthDate());
+				doctor.setAddress(person.getAddress());
+				doctor.setEmail(person.getEmail());
+			}
+			rs.close();
+			stmt.close();
+			return doctor;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

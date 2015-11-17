@@ -16,7 +16,7 @@ public class PersonDao {
 
 	public void addUser(Person person){
 		String sql = "insert into pessoa "
-				+ "(cpf,rg,	nome, dt_nascimento,parentesco)" + " values (?,?,?,?,?)";
+				+ "(cpf,rg,	nome, dt_nascimento)" + " values (?,?,?,?)";
 		
 		try {
 			// prepared statement para inserção
@@ -28,7 +28,6 @@ public class PersonDao {
 			stmt.setString(2, person.getRg());
 			stmt.setString(3, person.getName());
 			stmt.setDate(4, new Date(person.getBirthDate().getTimeInMillis()));
-			stmt.setString(5, person.getParentesco());
 			// executa
 			stmt.execute();
 			stmt.close();
@@ -45,15 +44,14 @@ public class PersonDao {
 	
 	public void updateUser(Person person){
 
-		String sql = "update pessoa set nome=?, rg=?, dt_nascimento=?, parentesco=?"
+		String sql = "update pessoa set nome=?, rg=?, dt_nascimento=?"
 				+ " where cpf=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, person.getName());
 			stmt.setString(2, person.getRg());
 			stmt.setDate(3, new Date(person.getBirthDate().getTimeInMillis()));
-			stmt.setString(4, person.getParentesco());
-			stmt.setString(5, person.getCpf());
+			stmt.setString(4, person.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -81,7 +79,6 @@ public class PersonDao {
 				person.setName(rs.getString("nome"));
 				person.setAddress(rs.getString("endereco"));
 				person.setEmail(rs.getString("email"));
-				person.setParentesco(rs.getString("parentesco"));
 
 				Calendar date = Calendar.getInstance();
 				date.setTime(rs.getDate("dt_nascimento"));

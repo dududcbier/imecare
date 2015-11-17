@@ -1,6 +1,10 @@
 package bd;
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.ArrayList;
+
 
 import modelo.DiagnosedDisease;
 
@@ -44,6 +48,41 @@ public class DiagnosedDiseaseDao {
 			stmt.setTime(5, new Time(doenca.getTime().getTimeInMillis()));			
 			stmt.execute();
 			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public List<DiagnosedDisease> getDiagnosedDisease(String cpf){
+
+		try {
+			DiagnosedDisease doenca = null;
+			List<DiagnosedDisease> doencas = new ArrayList<DiagnosedDisease>();
+			
+			PreparedStatement stmt = conexao.prepareStatement("select * "
+					+ "from doenca_diagnosticada where CPF_Paciente=?");
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				doenca = new DiagnosedDisease();
+				doenca.setCid(rs.getString("cid"));
+				doenca.setDoctorCpf(rs.getString("CPF_Medico"));
+				doenca.setPatientCpf(rs.getString("CPF_Paciente"));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("data"));
+				doenca.setDate(data);
+
+				data.setTime(rs.getDate("horario"));
+				doenca.setTime(data);
+
+				doencas.add(doenca);
+			}
+			rs.close();
+			stmt.close();
+			return doencas;
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

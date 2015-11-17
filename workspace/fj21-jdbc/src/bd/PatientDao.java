@@ -3,6 +3,7 @@ package bd;
 import java.sql.*;
 
 import modelo.Patient;
+import modelo.Person;
 import bd.PersonDao;
 
 public class PatientDao {
@@ -67,6 +68,38 @@ public class PatientDao {
 		}
 
 		person.removeUser(patient);
+	}
+
+	public Patient getPatient(String cpf){
+
+		try {
+			PersonDao personDao = new PersonDao();
+			Person person = personDao.getUser(cpf);
+			Patient patient = null;
+			
+			PreparedStatement stmt = conexao.prepareStatement("select * "
+					+ "from paciente where cpf=?");
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				patient = new Patient();
+
+				patient.setBloodType(rs.getString("tipo_sanguineo"));
+				patient.setName(person.getName());
+				patient.setRg(person.getRg());
+				patient.setCpf(person.getCpf());
+				patient.setBirthDate(person.getBirthDate());
+				patient.setAddress(person.getAddress());
+				patient.setEmail(person.getEmail());
+			}
+			rs.close();
+			stmt.close();
+			return patient;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

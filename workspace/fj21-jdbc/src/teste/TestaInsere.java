@@ -110,13 +110,16 @@ public class TestaInsere {
 		scheduleDao.addSchedule(sched);
 		System.out.println("Novo schedule gravado com sucesso!");
 
+		recordsDao.addRecords(record);
+		System.out.println("Novo record gravado com sucesso!");
 
-        List<Records> someList = new ArrayList<Records>();
-        someList = recordsDao.listRecord();
-        for(Iterator<Records> i = someList.iterator(); i.hasNext();) {
-  			Records item = i.next();
-  			System.out.println(item);
-        }
+
+     //    List<Records> someList = new ArrayList<Records>();
+     //    someList = recordsDao.listRecord();
+     //    for(Iterator<Records> i = someList.iterator(); i.hasNext();) {
+  			// Records item = i.next();
+  			// System.out.println(item);
+     //    }
 		System.out.println("Prontuário mostrado com sucesso!");
 		System.out.println("Prontuário mostrado com sucesso!");
 
