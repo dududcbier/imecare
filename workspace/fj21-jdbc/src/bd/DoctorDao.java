@@ -20,19 +20,19 @@ public class DoctorDao {
 		person.addUser(doctor);
 
 		String sql = "insert into medico "
-				+ "(crm, cpf, nome)" + " values (" + doctor.getCrm() + ",?,?)";
+				+ "(crm, cpf)" + " values (?,?)";
 		
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = conexao.prepareStatement(sql);			
 			// executa
-			stmt.setString(1, doctor.getCpf());
-			stmt.setString(2, doctor.getName());
+			stmt.setInt(1, doctor.getCrm());
+			stmt.setString(2, doctor.getCpf());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}	
+		}
 			
 	}	
 
@@ -43,10 +43,10 @@ public class DoctorDao {
 		
 		person.updateUser(doctor);
 
-		String sql = "update medico set crm=" + doctor.getCrm() + ", nome=? where cpf=?";
+		String sql = "update medico set crm=? where cpf=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, doctor.getName());
+			stmt.setInt(1, doctor.getCrm());
 			stmt.setString(2, doctor.getCpf());
 			stmt.execute();
 			stmt.close();

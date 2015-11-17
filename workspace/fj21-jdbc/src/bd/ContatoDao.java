@@ -11,6 +11,18 @@ public class ContatoDao {
 	   public ContatoDao() {
 	     this.conexao = ConnectionFactory.obterInstancia().obterConexao();
 	   }
+
+	   public void cleanTable(String table){
+		String sql = "delete from " + table;
+
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}	
+		}
 	   
 		public void adiciona(Contato contato) {
 			

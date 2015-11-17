@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.Calendar;
 
 import modelo.Person;
+import bd.EmailDao;
 
 public class PersonDao {
 	
@@ -37,7 +38,8 @@ public class PersonDao {
 			throw new RuntimeException(e);
 		}	
 		
-		//addEmail(person);	
+		EmailDao emailDao = new EmailDao();
+		emailDao.addEmail(person);	
 	}
 	
 	
@@ -58,7 +60,8 @@ public class PersonDao {
 			throw new RuntimeException(e);
 		}
 
-		//updateEmail(person);
+		EmailDao emailDao = new EmailDao();
+		emailDao.updateEmail(person);	
 	}
 
 	public Person getUser(String cpf){
@@ -106,11 +109,7 @@ public class PersonDao {
 			throw new RuntimeException(e);
 		}
 
-		// removeEmail(person);
-	}
-	
-	
-	
-	
-	
+		EmailDao emailDao = new EmailDao();
+		emailDao.removeEmail(person);	
+	}	
 }

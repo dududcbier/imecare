@@ -7,6 +7,7 @@ public class ConnectionFactory {
 
 	public static final String NOME_DRIVER = "org.postgresql.Driver";
     public static final String URL_BD = "jdbc:postgresql://postgresql.linux.ime.usp.br:5432/imecare";
+	
 	public static final String USUARIO_BD = "imecare";
 	public static final String SENHA_BD = "projeto";
 
@@ -26,7 +27,7 @@ public class ConnectionFactory {
 		Properties props = new Properties();
 		props.setProperty("ssl","true");
 		props.setProperty("sslfactory","org.postgresql.ssl.NonValidatingFactory");
-		props.setProperty("currentSchema","teste");
+		props.setProperty("currentSchema","engSoft");
 		props.setProperty("user", USUARIO_BD);
 		props.setProperty("password", SENHA_BD);
 

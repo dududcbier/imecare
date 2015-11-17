@@ -13,7 +13,7 @@ public class ExamDao {
 	}
 
 	public void addExam(Exam exam){
-		String sql = "insert into procedimento "
+		String sql = "insert into exame "
 				+ "(codigo_anvisa,nome,descricao)" + " values (?,?,?)";
 		
 		try {
@@ -32,7 +32,7 @@ public class ExamDao {
 
 	public void updateExam(Exam exam){
 
-		String sql = "update procedimento set nome=?, descricao=? where codigo_anvisa=?";
+		String sql = "update exame set nome=?, descricao=? where codigo_anvisa=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, exam.getName());
@@ -50,7 +50,7 @@ public class ExamDao {
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
-					+ "from procedimento where codigo_anvisa=?");
+					+ "from exame where codigo_anvisa=?");
 			stmt.setInt(1, exam.getAnvisaCode());
 			stmt.execute();
 			stmt.close();

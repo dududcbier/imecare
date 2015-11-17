@@ -1,3 +1,5 @@
+package modelo;
+
 public class Realiza {
 
 	private int anvisaCode = -1;
