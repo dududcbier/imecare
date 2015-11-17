@@ -20,8 +20,9 @@ public class RecordsDao {
 	
 		 try {
 				List<Records> record = new ArrayList<Records>();
-				PreparedStatement stmt = this.conexao
-						.prepareStatement("select * from prontuario where cpf=" + cpf);
+				String sql = "select * from prontuario where cpf=?";
+				PreparedStatement stmt = conexao.prepareStatement(sql);
+				stmt.setString(1, cpf);
 				ResultSet rs = stmt.executeQuery();
 	
 	

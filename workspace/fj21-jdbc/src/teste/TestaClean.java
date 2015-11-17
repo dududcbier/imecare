@@ -15,5 +15,10 @@ public class TestaClean {
 		dao.cleanTable("sintoma");
 		dao.cleanTable("exame");
 		dao.cleanTable("atendimento");
+		dao.cleanTable("realiza");
+		dao.cleanTable("doenca_diagnosticada");
+		dao.cleanTable("medicamento");
+		dao.cleanTable("possui");
+		dao.cleanTable("prescreve");
 	}
 }
