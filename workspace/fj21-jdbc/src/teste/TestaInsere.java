@@ -114,7 +114,7 @@ public class TestaInsere {
 		System.out.println("Novo record gravado com sucesso!");
 
 
-        List<Records> someList = recordsDao.listRecord(patient.getCpf());
+        List<Records> someList = recordsDao.listRecord(record.getCpf());
         for(Iterator<Records> i = someList.iterator(); i.hasNext();) {
   			Records item = i.next();
   			System.out.println(item);

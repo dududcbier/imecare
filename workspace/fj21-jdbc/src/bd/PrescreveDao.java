@@ -17,9 +17,9 @@ public class PrescreveDao {
 	
 	public void addPrescreve(Prescreve prescreve){
 		String sql = "insert into prescreve "
-				+ "(nome_medicamento, CPF_Medico, CRM, CPF_Paciente, " +
-				"nome_Medico, nome_Paciente, data, horario, dose, periodo, frequencia)" + 
-				" values (?,?,?,?,?,?,?,?,?,?,?)";
+				+ "(nome_medicamento, CPF_Medico, CPF_Paciente, " +
+				"data, horario, dose, periodo, frequencia)" + 
+				" values (?,?,?,?,?,?,?,?)";
 		
 		try {
 			// prepared statement para inserção
@@ -28,18 +28,13 @@ public class PrescreveDao {
 			// seta os valores
 
 			stmt.setString(1, prescreve.getMedicineName());
-			stmt.setString(2, prescreve.getDoctorCpf()); 
-			stmt.setInt(3, prescreve.getCRM()); 
-			stmt.setString(4, prescreve.getPatientCpf());
-			stmt.setString(5, prescreve.getDoctorName());
-			stmt.setString(6, prescreve.getPatientName());
-			stmt.setDate(7, new Date(prescreve.getDate().getTimeInMillis()));
-			stmt.setTime(8, new Time(prescreve.getTime().getTimeInMillis()));
-			stmt.setString(9, prescreve.getDose());
-			stmt.setTime(10, new Time(prescreve.getPeriod().getTimeInMillis()));
-			stmt.setString(11, prescreve.getFrequency());
-					
-				
+			stmt.setString(2, prescreve.getDoctorCpf());  
+			stmt.setString(3, prescreve.getPatientCpf());
+			stmt.setDate(4, new Date(prescreve.getDate().getTimeInMillis()));
+			stmt.setTime(5, new Time(prescreve.getTime().getTimeInMillis()));
+			stmt.setString(6, prescreve.getDose());
+			stmt.setTime(7, new Time(prescreve.getPeriod().getTimeInMillis()));
+			stmt.setString(8, prescreve.getFrequency());				
 				
 			// executa
 			stmt.execute();
@@ -48,30 +43,21 @@ public class PrescreveDao {
 			throw new RuntimeException(e);
 		}		
 	}
-	
-	
-	
-					
+			
 	public void removePrescreve (Prescreve prescreve) {
 		try {
 	
 			
 			PreparedStatement stmt = conexao.prepareStatement("delete "
-					+ "from prescreve where cpf_Medico=? AND nome_Medico=? AND CRM=? AND CPF_Paciente=? " +
-					"AND nome_Paciente=? AND Data=? AND Horario=? AND nome_medicamento=?");
+					+ "from prescreve where cpf_Medico=? AND CPF_Paciente=? " +
+					"AND Data=? AND Horario=? AND nome_medicamento=?");
 			
 			
-			stmt.setString(1, prescreve.getMedicineName());
-			stmt.setString(2, prescreve.getDoctorCpf()); 
-			stmt.setInt(3, prescreve.getCRM()); 
-			stmt.setString(4, prescreve.getPatientCpf());
-			stmt.setString(5, prescreve.getDoctorName());
-			stmt.setString(6, prescreve.getPatientName());
-			stmt.setDate(7, new Date(prescreve.getDate().getTimeInMillis()));
-			stmt.setTime(8, new Time(prescreve.getTime().getTimeInMillis()));
-			stmt.setString(9, prescreve.getDose());
-			stmt.setTime(10, new Time(prescreve.getPeriod().getTimeInMillis()));
-			stmt.setString(11, prescreve.getFrequency());
+			stmt.setString(1, prescreve.getDoctorCpf()); 
+			stmt.setString(2, prescreve.getPatientCpf());
+			stmt.setDate(3, new Date(prescreve.getDate().getTimeInMillis()));
+			stmt.setTime(4, new Time(prescreve.getTime().getTimeInMillis()));
+			stmt.setString(5, prescreve.getMedicineName());
 					
 			
 			stmt.execute();

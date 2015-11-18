@@ -19,7 +19,7 @@ public class DiagnosedDiseaseDao {
 	public void addDiagnosedDisease(DiagnosedDisease doenca){
 		String sql = "insert into doenca_diagnosticada "
 				+ "(CID, CPF_Medico, CPF_Paciente, data, horario)"
-				+ " values (?,?,?,?)";
+				+ " values (?,?,?,?,?)";
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = conexao.prepareStatement(sql);

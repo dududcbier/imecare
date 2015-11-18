@@ -14,7 +14,7 @@ public class RealizaDao {
 
 	public void addRealiza(Realiza realiza){
 		String sql = "insert into realiza "
-				+ "(codigo_anvisa,cpf_paciente" + " values (?,?)";
+				+ "(codigo_anvisa,cpf_paciente)" + " values (?,?)";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);

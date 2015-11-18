@@ -53,6 +53,7 @@ public class RecordsDao {
 		}
 
 	public void addRecords(Records record) {
+
 			
 		Exam exam = new Exam();
 		exam.setAnvisaCode(record.getAnvisaCode());
@@ -62,7 +63,10 @@ public class RecordsDao {
 		ExamDao examDao = new ExamDao();
 		try {
 			examDao.addExam(exam);
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no examDao");
+		}
 
 		Medicine medicine = new Medicine();
 		medicine.setName(record.getMedicineName());
@@ -71,7 +75,10 @@ public class RecordsDao {
 		MedicineDao medicineDao = new MedicineDao();
 		try {
 			medicineDao.addMedicine(medicine);
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no medicine");
+		}
 
 		Sympton sympton = new Sympton();
 		sympton.setName(record.getSymptonName());
@@ -80,7 +87,10 @@ public class RecordsDao {
 		SymptonDao symptonDao = new SymptonDao();
 		try {
 			symptonDao.addSympton(sympton);
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no sympton");
+		}
 
 		Doenca doenca = new Doenca();
 		doenca.setName(record.getDiseaseName());
@@ -89,28 +99,52 @@ public class RecordsDao {
 		DoencaDao doencaDao = new DoencaDao();
 		try {
 			doencaDao.addDoenca(doenca);
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no doenca");
+		}
 
 		Patient patient = new Patient();
 		patient.setName(record.getNamePatient());
 		patient.setCpf(record.getCpf());
 		patient.setBloodType(record.getType());
+		patient.setBirthDate(Calendar.getInstance());
 
 		PatientDao patientDao = new PatientDao();
 		try {
 			patientDao.addPatient(patient);
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no patient");
+		}
+
+		Schedule sched = new Schedule();
+		sched.setPatientCpf(record.getCpf());
+		sched.setDateTime(Calendar.getInstance());
+		sched.setDoctorCpf("12345678901");
+
+		ScheduleDao scheduleDao = new ScheduleDao();
+		try {
+			scheduleDao.addSchedule(sched);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no addRecords");
+		}
 
 	    DiagnosedDisease diagnosedDisease = new DiagnosedDisease();
 	    diagnosedDisease.setCid(doenca.getCid());
 	    diagnosedDisease.setPatientCpf(patient.getCpf());
-	    diagnosedDisease.setDate(Calendar.getInstance());
-	    diagnosedDisease.setTime(Calendar.getInstance());
+	    diagnosedDisease.setDoctorCpf("12345678901");
+	    diagnosedDisease.setDate(sched.getDateTime());
+	    diagnosedDisease.setTime(sched.getDateTime());
 
 	    DiagnosedDiseaseDao diagnosedDiseaseDao = new DiagnosedDiseaseDao();
 	    try {
 			diagnosedDiseaseDao.addDiagnosedDisease(diagnosedDisease);
-		} catch (Exception e) { }
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no diagnosedDisease");
+		}
 
 	    Possui possui = new Possui();
 	    possui.setCid(doenca.getCid());
@@ -119,18 +153,26 @@ public class RecordsDao {
 	    PossuiDao possuiDao = new PossuiDao();
 	    try	{
 	    	possuiDao.addPossui(possui);
-	    } catch (Exception e){ }
+	    } catch (Exception e){
+	    	throw new RuntimeException(e);
+	    	// System.out.println("Dei erro no possui");
+	    }
 
 	    Prescreve prescreve = new Prescreve();
 	    prescreve.setMedicineName(medicine.getName());
 	    prescreve.setPatientCpf(patient.getCpf());
-	    prescreve.setDate(Calendar.getInstance());
-	    prescreve.setTime(Calendar.getInstance());
+	    prescreve.setDate(sched.getDateTime());
+	    prescreve.setTime(sched.getDateTime());
+	    prescreve.setPeriod(sched.getDateTime());
+	    prescreve.setDoctorCpf("12345678901");
 
 	    PrescreveDao prescreveDao = new PrescreveDao();
 	    try {
 	    	prescreveDao.addPrescreve(prescreve);
-	    } catch (Exception e) { }
+	    } catch (Exception e) {
+	    	throw new RuntimeException(e);
+	    	// System.out.println("Dei erro no prescreve");
+	    }
 
 		Realiza realiza = new Realiza();
 		realiza.setAnvisaCode(exam.getAnvisaCode());
@@ -139,6 +181,9 @@ public class RecordsDao {
 		RealizaDao realizaDao = new RealizaDao();
 		try {
 			realizaDao.addRealiza(realiza);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+			// System.out.println("Dei erro no realiza");
+		}
 	}
 }
