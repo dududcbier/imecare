@@ -23,7 +23,7 @@ public class TestScheduleDao {
 		return 0;
 	}
 
-	@Test
+	@Test(expected=RuntimeException.class)
 	public void insertPatientEmptyCPF() {
 
 		Schedule sched = new Schedule();
@@ -33,7 +33,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
+		insertSchedule(sched);
 		// assert statements
-		assertEquals("Result must be -1 (SQL Exception)", -1, insertSchedule(sched));
+		// assertEquals("Result must be -1 (SQL Exception)", -1, insertSchedule(sched));
 	}
 } 
