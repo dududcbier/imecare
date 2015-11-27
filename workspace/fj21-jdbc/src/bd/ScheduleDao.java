@@ -1,6 +1,6 @@
 package bd;
 
-import java.sql.*;
+import java.sql.*;	
 
 import modelo.Schedule;
 
@@ -12,7 +12,7 @@ public class ScheduleDao {
 	     this.conexao = ConnectionFactory.obterInstancia().obterConexao();
 	}
 
-	public void addSchedule(Schedule schedule){
+	public void addSchedule(Schedule schedule) throws SQLException {
 
 			String sql = "insert into atendimento "
 					+ "(CPF_Medico, CPF_Paciente, data, horario, tipo_atendimento, comentario)"
@@ -39,7 +39,7 @@ public class ScheduleDao {
 				
 		}
 
-	public void updateSchedule(Schedule schedule){
+	public void updateSchedule(Schedule schedule) throws SQLException {
 
 
 		String sql = "update atendimento set tipo_atendimento=? comentario=?"
@@ -66,7 +66,7 @@ public class ScheduleDao {
 			
 	}
 
-	public void removeSchedule(Schedule schedule){
+	public void removeSchedule(Schedule schedule) throws SQLException {
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
