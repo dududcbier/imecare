@@ -42,8 +42,8 @@ public class ScheduleDao {
 	public void updateSchedule(Schedule schedule) throws SQLException {
 
 
-		String sql = "update atendimento set tipo_atendimento=? comentario=?"
-					+ "CPF_Paciente=? and CPF_Medico=? and data=? and hora=?";
+		String sql = "update atendimento set tipo_atendimento=?, comentario=?"
+					+ "where CPF_Paciente=? and CPF_Medico=? and data=? and horario=?";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class ScheduleDao {
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
-					+ "from atendimento where CPF_Paciente=? and CPF_Medico=? and data=? and hora=?");
+					+ "from atendimento where CPF_Paciente=? and CPF_Medico=? and data=? and horario=?");
 			stmt.setString(1, schedule.getPatientCpf());
 			stmt.setString(2, schedule.getDoctorCpf());
 			stmt.setDate(3, new Date(schedule.getDateTime().getTimeInMillis()));
