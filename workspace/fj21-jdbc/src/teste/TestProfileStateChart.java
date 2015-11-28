@@ -116,4 +116,44 @@ public class TestProfileStateChart {
 		diagnosedDiseaseDao.addDiagnosedDisease(diagDisease);
 
 	}
+
+	@Test
+	public void insertValidPrescreve() {
+
+		Prescreve prescreve = new Prescreve();
+		Calendar data = Calendar.getInstance();
+
+		prescreve.setMedicineName("Tylenol");
+		prescreve.setDoctorCpf("12345678901");
+		prescreve.setCRM(43436);
+		prescreve.setPatientCpf("10987654321");
+		prescreve.setDoctorName("Médico");
+		prescreve.setPatientName("Patient");
+		prescreve.setDate(data);
+		prescreve.setTime(data);
+		prescreve.setDose("5");
+		prescreve.setPeriod(data);
+		prescreve.setFrequency("3");
+
+		Schedule sched = new Schedule();
+		sched.setDoctorCpf("12345678901");
+		sched.setPatientCpf("10987654321");
+		sched.setDateTime(data);
+		sched.setType("refazer");
+		sched.setComment(" ");
+
+		ScheduleDao schedDao = new ScheduleDao();
+		try {
+			schedDao.addSchedule(sched);
+		}
+
+		catch(SQLException e){
+			throw new RuntimeException(e);
+		}
+
+		PrescreveDao prescreveDao = new PrescreveDao();
+		prescreveDao.addPrescreve(prescreve);
+
+	}
+
 } 
