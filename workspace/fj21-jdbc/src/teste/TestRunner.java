@@ -10,7 +10,13 @@ public class TestRunner {
     Result result = JUnitCore.runClasses(TestScheduleDao.class);
     System.out.println("\nRodando testes Schedule DAO\n");
     for (Failure failure : result.getFailures()) {
-      System.out.println(failure.toString());
+      System.out.println("\t" + failure.toString());
+    }
+
+    result = JUnitCore.runClasses(TestProfileStateChart.class);
+    System.out.println("\nRodando testes Profile State Chart\n");
+    for (Failure failure : result.getFailures()) {
+      System.out.println("\t" + failure.toString());
     }
   }
 } 
