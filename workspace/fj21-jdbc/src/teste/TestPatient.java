@@ -13,12 +13,12 @@ import java.util.*;
 
 public class TestPatient {
 
-	public void insertPatient(Patient patient) {
+	public int insertPatient(Patient patient) {
 
 		PatientDao patDao = new PatientDao();
 		
 		try {
-			patientDao.addPatient(patient);
+			patDao.addPatient(patient);
 		}
 
 		catch(SQLException e){
@@ -121,7 +121,7 @@ public class TestPatient {
 	public void deleteValidPatient(){
 
 		Patient patient = new Patient ();
-		patient.setPatientCpf("10987654321");
+		patient.setCpf("10987654321");
 		patient.setBloodType("O+");
 
 		deletePatient(patient);
@@ -137,7 +137,7 @@ public class TestPatient {
 
 
         Patient patient = new Patient ();
-		patient.setPatientCpf("00000000001");
+		patient.setCpf("00000000001");
 		patient.setBloodType("O+");
 		
  		deletePatient(patient);
