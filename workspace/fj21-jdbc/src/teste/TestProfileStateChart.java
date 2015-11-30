@@ -206,7 +206,7 @@ public class TestProfileStateChart {
 		Calendar data = Calendar.getInstance();
 
 		prescreve.setMedicineName("Tylenol");
-		prescreve.setDoctorCpf("");
+		prescreve.setDoctorCpf(null);
 		prescreve.setCRM(43436);
 		prescreve.setPatientCpf("10987654321");
 		prescreve.setDoctorName("Médico");
@@ -418,7 +418,7 @@ public class TestProfileStateChart {
 		person.setAddress("R. do Matão, 1010");
 		person.setBirthDate(Calendar.getInstance());
 		person.setRg("115345151");
-		person.setCpf("11534515120");
+		person.setCpf(null);
 
 		PersonDao personDao = new PersonDao();
 		personDao.updateUser(person);

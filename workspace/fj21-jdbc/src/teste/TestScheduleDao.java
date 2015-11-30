@@ -2,9 +2,13 @@ package teste;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.*;
 import bd.ScheduleDao;
+import bd.DoctorDao;
+import bd.PersonDao;
 import modelo.Schedule;
+import modelo.Doctor;
+import modelo.Person;
 import java.sql.*;
 import java.util.*;
 
@@ -66,7 +70,7 @@ public class TestScheduleDao {
 	public void insertDoctorEmptyCPF() {
 
 		Schedule sched = new Schedule();
-		sched.setDoctorCpf("");
+		sched.setDoctorCpf(null);
 		sched.setPatientCpf("10987654321");
 		sched.setDateTime(Calendar.getInstance());
 		sched.setType("refazer");
@@ -186,6 +190,4 @@ public class TestScheduleDao {
 		deleteSchedule(sched);
 
 	}
-
-
 } 
