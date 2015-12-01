@@ -50,5 +50,16 @@ public class TestRunner {
 			System.out.println("[\033[92mOK\033[0m]: passed on " + success + "/" + result.getRunCount());
 		else
 			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
+
+		result = JUnitCore.runClasses(TestMedicine.class);
+		System.out.println("\nRodando testes Medicine");
+		for (Failure failure : result.getFailures()) {
+		  System.out.println("\t" + failure.toString());
+		}
+		success = result.getRunCount() - result.getFailureCount();
+		if (result.wasSuccessful())
+			System.out.println("[\033[92mOK\033[0m]: passed on " + success + "/" + result.getRunCount());
+		else
+			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
 	}
 } 

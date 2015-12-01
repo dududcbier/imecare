@@ -14,7 +14,7 @@ public class MedicineDao {
 		this.conexao = ConnectionFactory.obterInstancia().obterConexao();
 	}
 
-	public void addMedicine(Medicine medicine) throws SQLException{
+	public void addMedicine(Medicine medicine){
 			String sql = "insert into medicamento "
 					+ "(tarja, nome)" + " values (?,?)";
 			
@@ -33,7 +33,7 @@ public class MedicineDao {
 	}
 	
 	// Obs: Medicamentos não tem substâncias no DB
-	public void updateMedicine(Medicine medicine) throws SQLException{
+	public void updateMedicine(Medicine medicine){
 
 		String sql = "update medicamento set tarja=? where nome=?";
 		try {
@@ -47,7 +47,7 @@ public class MedicineDao {
 		}
 	} 
 
-	public void removeMedicine(Medicine medicine) throws SQLException{
+	public void removeMedicine(Medicine medicine){
 
 		try {
 			PreparedStatement stmt = conexao.prepareStatement("delete "
