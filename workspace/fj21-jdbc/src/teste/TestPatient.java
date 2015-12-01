@@ -17,8 +17,13 @@ public class TestPatient {
 	public void insertPatientEmptyCPF() {
 
 		Patient patient = new Patient();
-		patient.setBloodType("B+");
-		patient.setCpf("");
+		patient.setCpf(null);
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("O+");
 		
 		PatientDao patDao = new PatientDao();	
 		patDao.addPatient(patient);
@@ -58,9 +63,14 @@ public class TestPatient {
 	@Test
 	public void editValidPatient(){
 
-		Patient patient = new Patient ();
-		patient.setBloodType("A+");
+		Patient patient = new Patient();
 		patient.setCpf("10987654321");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("O+");
 		
 		PatientDao patDao = new PatientDao();	
 		patDao.addPatient(patient);
@@ -76,9 +86,13 @@ public class TestPatient {
 	public void editInvalidPatient(){
 
 		Patient patient = new Patient ();
-
-		patient.setBloodType("AB+");
 		patient.setCpf("10987654399");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("AB+");
 
 	   	PatientDao patDao = new PatientDao();	
 		patDao.addPatient(patient);
@@ -92,9 +106,15 @@ public class TestPatient {
 
 		Patient patient = new Patient ();
 		patient.setCpf("10987654321");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
 		patient.setBloodType("O+");
 
-		PatientDao patDao = new PatientDao();	
+		PatientDao patDao = new PatientDao();
+		patDao.addPatient(patient);
 		patDao.removePatient(patient);
 
 
@@ -108,6 +128,11 @@ public class TestPatient {
 
         Patient patient = new Patient ();
 		patient.setCpf("00000000001");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
 		patient.setBloodType("O+");
 		
  		PatientDao patDao = new PatientDao();	
@@ -142,8 +167,8 @@ public class TestPatient {
 		}
 	}
 
-	@AfterClass
-	public static void setUpAfterClass() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		PatientDao patientDao = new PatientDao();
 		Patient patient = new Patient();
 		patient.setCpf("10987654321");
