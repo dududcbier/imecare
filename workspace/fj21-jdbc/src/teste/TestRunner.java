@@ -28,5 +28,7 @@ public class TestRunner {
 		rodaTeste(TestPatient.class, "Patient");
 		rodaTeste(TestMedicine.class, "Medicine");
 		rodaTeste(TestDoctor.class, "Doctor");
+		System.out.println("");
+
 	}
 } 

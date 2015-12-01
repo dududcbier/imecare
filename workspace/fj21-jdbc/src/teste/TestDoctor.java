@@ -2,7 +2,7 @@ package teste;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.*;
 import bd.DoctorDao;
 import modelo.Doctor;
 import java.sql.*;
@@ -14,8 +14,14 @@ public class TestDoctor {
 	public void insertDoctorEmptyCPF() {
 
 		Doctor doc = new Doctor();
-		doc.setCrm(12);
-		doc.setCpf("");
+		doc.setName("Médico");
+		doc.setEmail("medico@medico.com.br");
+		doc.setAddress("Rua dos médicos, 123");
+		doc.setBirthDate(Calendar.getInstance());
+		doc.setRg("123456789");
+		doc.setCpf(null);
+		doc.setCrm(13);
+		doc.setEspecialidade("Neurologista");
 		
 		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
@@ -26,8 +32,14 @@ public class TestDoctor {
 	public void insertValidDoctor() {
 
 		Doctor doc = new Doctor();
-		doc.setCrm(13);
+		doc.setName("Médico");
+		doc.setEmail("medico@medico.com.br");
+		doc.setAddress("Rua dos médicos, 123");
+		doc.setBirthDate(Calendar.getInstance());
+		doc.setRg("123456789");
 		doc.setCpf("10987654321");
+		doc.setCrm(13);
+		doc.setEspecialidade("Neurologista");
 		
 		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
@@ -39,10 +51,17 @@ public class TestDoctor {
 
 		Doctor doc = new Doctor();
 		
-		doc.setCrm(12);
+		doc.setName("Médico");
+		doc.setEmail("medico@medico.com.br");
+		doc.setAddress("Rua dos médicos, 123");
+		doc.setBirthDate(Calendar.getInstance());
+		doc.setRg("123456789");
 		doc.setCpf("10987654321");
+		doc.setCrm(13);
+		doc.setEspecialidade("Neurologista");
 
 		DoctorDao docDao = new DoctorDao();
+		docDao.addDoctor(doc);
 		docDao.addDoctor(doc);
 
 	}
@@ -52,13 +71,20 @@ public class TestDoctor {
 	public void editValidDoctor(){
 
 		Doctor doc = new Doctor ();
-		doc.setCrm(14);
+		doc.setName("Médico");
+		doc.setEmail("medico@medico.com.br");
+		doc.setAddress("Rua dos médicos, 123");
+		doc.setBirthDate(Calendar.getInstance());
+		doc.setRg("123456789");
 		doc.setCpf("10987654321");
+		doc.setCrm(13);
+		doc.setEspecialidade("Neurologista");
 		
 		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
 		
 		docDao.updateDoctor(doc);
+
 
 	}
 
@@ -104,5 +130,14 @@ public class TestDoctor {
 	    docDao.removeDoctor(doc);
 
 	}
+
+	@After
+	public void tearDown() throws Exception {
+		DoctorDao doctorDao = new DoctorDao();
+		Doctor doctor = new Doctor();
+		doctor.setCpf("10987654321");
+		doctorDao.removeDoctor(doctor);
+	}
+
 
 } 
