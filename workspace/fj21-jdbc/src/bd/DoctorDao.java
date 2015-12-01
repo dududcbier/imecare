@@ -14,7 +14,7 @@ public class DoctorDao {
 		this.conexao = ConnectionFactory.obterInstancia().obterConexao();
 	}
 	
-	public void addDoctor(Doctor doctor){
+	public void addDoctor(Doctor doctor) {
 		
 		PersonDao person = new PersonDao();
 				
@@ -37,7 +37,7 @@ public class DoctorDao {
 			
 	}	
 
-	public void updateDoctor(Doctor doctor){
+	public void updateDoctor(Doctor doctor) {
 
 		
 		PersonDao person = new PersonDao();
