@@ -6,9 +6,10 @@ import org.junit.runner.notification.Failure;
 
 public class TestRunner {
 	
-	public static void main(String[] args) {
-		Result result = JUnitCore.runClasses(TestScheduleDao.class);
-		System.out.println("\nRodando testes Schedule DAO");
+	private static void rodaTeste(Class c, String name) {
+
+		Result result = JUnitCore.runClasses(c);
+		System.out.println("\nRodando testes " + name);
 		for (Failure failure : result.getFailures()) {
 		  System.out.println("\t" + failure.toString());
 		}
@@ -18,48 +19,14 @@ public class TestRunner {
 		else
 			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
 
-		result = JUnitCore.runClasses(TestProfileStateChart.class);
-		System.out.println("\nRodando testes Profile State Chart");
-		for (Failure failure : result.getFailures()) {
-		  System.out.println("\t" + failure.toString());
-		}
-		success = result.getRunCount() - result.getFailureCount();
-		if (result.wasSuccessful())
-			System.out.println("[\033[92mOK\033[0m]: passed on " + success + "/" + result.getRunCount());
-		else
-			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
-	
-		result = JUnitCore.runClasses(TestRegisterStateChart.class);
-		System.out.println("\nRodando testes Register State Chart");
-		for (Failure failure : result.getFailures()) {
-		  System.out.println("\t" + failure.toString());
-		}
-		success = result.getRunCount() - result.getFailureCount();
-		if (result.wasSuccessful())
-			System.out.println("[\033[92mOK\033[0m]: passed on " + success + "/" + result.getRunCount());
-		else
-			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
+	}
 
-		result = JUnitCore.runClasses(TestPatient.class);
-		System.out.println("\nRodando testes Patient");
-		for (Failure failure : result.getFailures()) {
-		  System.out.println("\t" + failure.toString());
-		}
-		success = result.getRunCount() - result.getFailureCount();
-		if (result.wasSuccessful())
-			System.out.println("[\033[92mOK\033[0m]: passed on " + success + "/" + result.getRunCount());
-		else
-			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
-
-		result = JUnitCore.runClasses(TestMedicine.class);
-		System.out.println("\nRodando testes Medicine");
-		for (Failure failure : result.getFailures()) {
-		  System.out.println("\t" + failure.toString());
-		}
-		success = result.getRunCount() - result.getFailureCount();
-		if (result.wasSuccessful())
-			System.out.println("[\033[92mOK\033[0m]: passed on " + success + "/" + result.getRunCount());
-		else
-			System.out.println("[\033[0;31mFAIL\033[0m]: passed on " + success + "/" + result.getRunCount());
+	public static void main(String[] args) {
+		rodaTeste(TestScheduleDao.class, "Schedule DAO");
+		rodaTeste(TestProfileStateChart.class, "Profile State Chart");
+		rodaTeste(TestRegisterStateChart.class, "Register State Chart");
+		rodaTeste(TestPatient.class, "Patient");
+		rodaTeste(TestMedicine.class, "Medicine");
+		rodaTeste(TestDoctor.class, "Doctor");
 	}
 } 
