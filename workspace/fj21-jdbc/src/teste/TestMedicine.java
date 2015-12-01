@@ -10,6 +10,8 @@ import java.util.*;
 
 
 public class TestMedicine {
+	
+	private MedicineDao medDao = new MedicineDao();
 
     @Test(expected=RuntimeException.class)
     public void insertNullNameMedicine() {
@@ -17,8 +19,7 @@ public class TestMedicine {
 		Medicine medicine = new Medicine();
 		medicine.setTarja("preta");
 		medicine.setName("");
-
-		MedicineDao medDao = new MedicineDao();		
+		
 		medDao.addMedicine(medicine);
     }
 
@@ -28,8 +29,7 @@ public class TestMedicine {
 		Medicine medicine = new Medicine();
 		medicine.setTarja(" ");
 		medicine.setName("Omeprazol");
-		
-		MedicineDao medDao = new MedicineDao();		
+				
 		medDao.addMedicine(medicine);
     }
 
@@ -39,8 +39,7 @@ public class TestMedicine {
 		Medicine medicine = new Medicine();
 		medicine.setTarja("");
 		medicine.setName("Tylenol");
-
-		MedicineDao medDao = new MedicineDao();		
+		
 		medDao.addMedicine(medicine);
     }
 
@@ -50,8 +49,7 @@ public class TestMedicine {
 		Medicine medicine = new Medicine();
 		medicine.setTarja(" ");
 		medicine.setName("Omeprazol");
-		
-		MedicineDao medDao = new MedicineDao();		
+				
 		medDao.removeMedicine(medicine);
     }
 
@@ -61,8 +59,7 @@ public class TestMedicine {
 	Medicine medicine = new Medicine();
 	medicine.setTarja("");
 	medicine.setName("Atroveran");
-	
-	MedicineDao medDao = new MedicineDao();		
+		
 	medDao.removeMedicine(medicine);
 	 
     }

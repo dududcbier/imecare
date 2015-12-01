@@ -10,6 +10,8 @@ import java.util.*;
 
 public class TestDoctor {
 
+	private DoctorDao docDao = new DoctorDao();
+
 	@Test(expected=RuntimeException.class)
 	public void insertDoctorEmptyCPF() {
 
@@ -23,7 +25,6 @@ public class TestDoctor {
 		doc.setCrm(13);
 		doc.setEspecialidade("Neurologista");
 		
-		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
 	}
 
@@ -41,7 +42,6 @@ public class TestDoctor {
 		doc.setCrm(13);
 		doc.setEspecialidade("Neurologista");
 		
-		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
 	}
 
@@ -60,7 +60,6 @@ public class TestDoctor {
 		doc.setCrm(13);
 		doc.setEspecialidade("Neurologista");
 
-		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
 		docDao.addDoctor(doc);
 
@@ -80,7 +79,6 @@ public class TestDoctor {
 		doc.setCrm(13);
 		doc.setEspecialidade("Neurologista");
 		
-		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
 		
 		docDao.updateDoctor(doc);
@@ -99,7 +97,6 @@ public class TestDoctor {
 		doc.setCrm(16);
 		doc.setCpf("10987654399");
 
-		DoctorDao docDao = new DoctorDao();
 	    docDao.updateDoctor(doc);
 
 	}
@@ -111,7 +108,6 @@ public class TestDoctor {
 		doc.setCpf("10987654321");
 		doc.setCrm(12);
 
-		DoctorDao docDao = new DoctorDao();
 	    docDao.removeDoctor(doc);
 
 	}
@@ -126,7 +122,7 @@ public class TestDoctor {
 		doc.setCpf("00000000001");
 		doc.setCrm(15);
 		
- 		DoctorDao docDao = new DoctorDao();
+
 	    docDao.removeDoctor(doc);
 
 	}
@@ -146,7 +142,6 @@ public class TestDoctor {
 		doc.setCrm(13);
 		doc.setEspecialidade("Neurologista");
 		
-		DoctorDao docDao = new DoctorDao();
 		docDao.addDoctor(doc);
 		
 		Doctor doc2 = docDao.getDoctor(doc.getCpf());
@@ -161,7 +156,6 @@ public class TestDoctor {
 	@Test
 	public void getInvalidDoctor(){
 
-		DoctorDao docDao = new DoctorDao();
 		Doctor doc = docDao.getDoctor("78792749273");
 
 		assertEquals(doc, null);
@@ -170,7 +164,6 @@ public class TestDoctor {
 	@Test(expected=RuntimeException.class)
 	public void getEmptyCpfDoctor(){
 
-		DoctorDao docDao = new DoctorDao();
 		Doctor doc = docDao.getDoctor(null);
 	}
 

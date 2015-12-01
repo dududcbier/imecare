@@ -37,7 +37,7 @@ public class SymptonDao {
 
 	public void updateSympton(Sympton sympton){
 
-		String sql = "update sympton set nome=?, descricao=?"
+		String sql = "update sintoma set descricao=?"
 				+ " where nome=?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);

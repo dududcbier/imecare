@@ -14,6 +14,8 @@ import java.util.*;
 
 public class TestRegisterStateChart {
 
+	DoctorDao doctorDao = new DoctorDao();
+
 	// User já foi testado em Test Profile State Chart
 	// Patient já foi testado em Test Patient
 
@@ -30,7 +32,6 @@ public class TestRegisterStateChart {
 		doctor.setCrm(43436);
 		doctor.setEspecialidade("Doctor");
 
-		DoctorDao doctorDao = new DoctorDao();
 		doctorDao.addDoctor(doctor);
 
 	}
@@ -48,7 +49,6 @@ public class TestRegisterStateChart {
 		doctor.setCrm(43436);
 		doctor.setEspecialidade("Doctor");
 
-		DoctorDao doctorDao = new DoctorDao();
 		doctorDao.addDoctor(doctor);
 		doctorDao.addDoctor(doctor);
 
@@ -67,14 +67,12 @@ public class TestRegisterStateChart {
 		doctor.setCrm(43436);
 		doctor.setEspecialidade("Doctor");
 
-		DoctorDao doctorDao = new DoctorDao();
 		doctorDao.addDoctor(doctor);
 
 	}
 
 	@After
 	public void tearDown() {
-		DoctorDao doctorDao = new DoctorDao();
 		Doctor doctor = new Doctor();
 		Long i = 33322211100L;
 		doctor.setCpf(Long.toString(i));

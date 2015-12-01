@@ -13,6 +13,8 @@ import java.util.*;
 
 public class TestPatient {
 
+	PatientDao patDao = new PatientDao();
+
 	@Test(expected=RuntimeException.class)
 	public void insertPatientEmptyCPF() {
 
@@ -25,7 +27,6 @@ public class TestPatient {
 		patient.setRg("987654321");
 		patient.setBloodType("O+");
 		
-		PatientDao patDao = new PatientDao();	
 		patDao.addPatient(patient);
 	}
 
@@ -40,9 +41,7 @@ public class TestPatient {
 		patient.setAddress("Rua dos patients, 123");
 		patient.setBirthDate(Calendar.getInstance());
 		patient.setRg("987654321");
-		patient.setBloodType("O+");
-
-		PatientDao patDao = new PatientDao();	
+		patient.setBloodType("O+");	
 		patDao.addPatient(patient);
 	}
 
@@ -54,8 +53,6 @@ public class TestPatient {
 		
 		patient.setBloodType("B+");
 		patient.setCpf("10987654321");
-
-		PatientDao patDao = new PatientDao();
 		patDao.addPatient(patient);
 	}
 
@@ -72,7 +69,6 @@ public class TestPatient {
 		patient.setRg("987654321");
 		patient.setBloodType("O+");
 		
-		PatientDao patDao = new PatientDao();	
 		patDao.addPatient(patient);
 		
 		patDao.updatePatient(patient);
@@ -94,7 +90,7 @@ public class TestPatient {
 		patient.setRg("987654321");
 		patient.setBloodType("AB+");
 
-	   	PatientDao patDao = new PatientDao();	
+		
 		patDao.addPatient(patient);
 		
 		patDao.updatePatient(patient);
@@ -112,8 +108,6 @@ public class TestPatient {
 		patient.setBirthDate(Calendar.getInstance());
 		patient.setRg("987654321");
 		patient.setBloodType("O+");
-
-		PatientDao patDao = new PatientDao();
 		patDao.addPatient(patient);
 		patDao.removePatient(patient);
 
@@ -134,13 +128,13 @@ public class TestPatient {
 		patient.setBirthDate(Calendar.getInstance());
 		patient.setRg("987654321");
 		patient.setBloodType("O+");
-		
- 		PatientDao patDao = new PatientDao();	
+			
 		patDao.removePatient(patient);
 	}
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
 		PatientDao patientDao = new PatientDao();
 		Patient patient = new Patient();
 		patient.setCpf("10987654321");
@@ -169,10 +163,9 @@ public class TestPatient {
 
 	@After
 	public void tearDown() throws Exception {
-		PatientDao patientDao = new PatientDao();
 		Patient patient = new Patient();
 		patient.setCpf("10987654321");
-		patientDao.removePatient(patient);
+		patDao.removePatient(patient);
 	}
 
 } 
