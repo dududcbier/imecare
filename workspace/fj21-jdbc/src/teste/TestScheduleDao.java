@@ -15,45 +15,6 @@ import java.util.*;
 
 public class TestScheduleDao {
 
-	private int insertSchedule(Schedule schedule){
-		ScheduleDao schedDao = new ScheduleDao();
-
-		try {
-			schedDao.addSchedule(schedule);
-		}
-
-		catch(SQLException e){
-			return -1;
-		}
-		return 0;
-	}
-
-	private int editSchedule(Schedule schedule){
-		ScheduleDao schedDao = new ScheduleDao();
-
-		try {
-			schedDao.updateSchedule(schedule);
-		}
-
-		catch(SQLException e){
-			return -1;
-		}
-		return 0;
-	}
-
-	private int deleteSchedule(Schedule schedule){
-		ScheduleDao schedDao = new ScheduleDao();
-
-		try {
-			schedDao.removeSchedule(schedule);
-		}
-
-		catch(SQLException e){
-			return -1;
-		}
-		return 0;
-	}
-
 	@Test(expected=RuntimeException.class)
 	public void insertPatientEmptyCPF() {
 
@@ -64,7 +25,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		insertSchedule(sched);
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -77,7 +39,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		insertSchedule(sched);
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
 	}
 
 	@Test
@@ -90,7 +53,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		assertEquals("Must be able to insert", 0, insertSchedule(sched));
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
 	}
 
 	@Test(expected=RuntimeException.class) 
@@ -103,9 +67,9 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		assertEquals("Must be able to insert", 0, insertSchedule(sched));
-		assertEquals("Must not be able to insert", -1, insertSchedule(sched));
-
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
+		schedDao.addSchedule(sched);
 	}
 
 	@Test(expected=RuntimeException.class) 
@@ -118,8 +82,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		assertEquals("Must not be able to insert", -1, insertSchedule(sched));
-
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
 	}
 
 	@Test
@@ -132,11 +96,12 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		insertSchedule(sched);
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
 
 		sched.setComment("Diferente");
 		
-		editSchedule(sched);
+		schedDao.updateSchedule(sched);
 
 	}
 
@@ -154,8 +119,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-	 editSchedule(sched);
-
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.updateSchedule(sched);
 	}
 
 	@Test
@@ -168,9 +133,9 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 
-		insertSchedule(sched);
-		
-		deleteSchedule(sched);
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.addSchedule(sched);
+		schedDao.removeSchedule(sched);
 
 	}
 
@@ -188,8 +153,8 @@ public class TestScheduleDao {
 		sched.setType("refazer");
 		sched.setComment("Simpático");
 		
-		deleteSchedule(sched);
-
+		ScheduleDao schedDao = new ScheduleDao();
+		schedDao.removeSchedule(sched);
 	}
 
 	@BeforeClass

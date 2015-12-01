@@ -13,47 +13,6 @@ import java.util.*;
 
 public class TestPatient {
 
-	// public int insertPatient(Patient patient) {
-
-	// 	PatientDao patDao = new PatientDao();
-		
-	// 	try {
-	// 		patDao.addPatient(patient);
-	// 	}
-
-	// 	catch(SQLException e){
-	// 		return -1;
-	// 	}
-	// 	return 0;
-	// }
-
-
-	// private int editPatient(Patient patient){
-	// 	PatientDao patDao = new PatientDao();
-
-	// 	try {
-	// 		patDao.updatePatient(patient);
-	// 	}
-
-	// 	catch(SQLException e){
-	// 		return -1;
-	// 	}
-	// 	return 0;
-	// }
-
-	// private int deletePatient(Patient patient){
-	// 	PatientDao patDao = new PatientDao();
-
-	// 	try {
-	// 		patDao.removePatient(patient);
-	// 	}
-
-	// 	catch(SQLException e){
-	// 		return -1;
-	// 	}
-	// 	return 0;
-	// }
-
 	@Test(expected=RuntimeException.class)
 	public void insertPatientEmptyCPF() {
 

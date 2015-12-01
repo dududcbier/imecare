@@ -40,13 +40,7 @@ public class TestProfileStateChart {
 		diagDisease.setTime(data);
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		DiagnosedDiseaseDao diagnosedDiseaseDao = new DiagnosedDiseaseDao();
 		diagnosedDiseaseDao.addDiagnosedDisease(diagDisease);
@@ -149,13 +143,7 @@ public class TestProfileStateChart {
 		sched.setComment(" ");
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		PrescreveDao prescreveDao = new PrescreveDao();
 		prescreveDao.addPrescreve(prescreve);
@@ -188,13 +176,7 @@ public class TestProfileStateChart {
 		sched.setComment(" ");
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		PrescreveDao prescreveDao = new PrescreveDao();
 		prescreveDao.addPrescreve(prescreve);
@@ -227,13 +209,7 @@ public class TestProfileStateChart {
 		sched.setComment(" ");
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		PrescreveDao prescreveDao = new PrescreveDao();
 		prescreveDao.addPrescreve(prescreve);
@@ -266,13 +242,7 @@ public class TestProfileStateChart {
 		sched.setComment(" ");
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		PrescreveDao prescreveDao = new PrescreveDao();
 		prescreveDao.addPrescreve(prescreve);
@@ -305,13 +275,7 @@ public class TestProfileStateChart {
 		sched.setComment(" ");
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		PrescreveDao prescreveDao = new PrescreveDao();
 		prescreveDao.addPrescreve(prescreve);
@@ -332,13 +296,7 @@ public class TestProfileStateChart {
 		sched.setComment(" ");
 
 		ScheduleDao schedDao = new ScheduleDao();
-		try {
-			schedDao.addSchedule(sched);
-		}
-
-		catch(SQLException e){
-			throw new RuntimeException(e);
-		}
+		schedDao.addSchedule(sched);
 
 		PrescreveDao prescreveDao = new PrescreveDao();
 		prescreveDao.addPrescreve(prescreve);
