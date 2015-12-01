@@ -6,9 +6,10 @@ import org.junit.*;
 import bd.ScheduleDao;
 import bd.DoctorDao;
 import bd.PersonDao;
+import bd.PatientDao;
 import modelo.Schedule;
 import modelo.Doctor;
-import modelo.Person;
+import modelo.Patient;
 import java.sql.*;
 import java.util.*;
 
@@ -189,5 +190,41 @@ public class TestScheduleDao {
 		
 		deleteSchedule(sched);
 
+	}
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		PatientDao patientDao = new PatientDao();
+		Patient patient = new Patient();
+		patient.setCpf("10987654321");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("O+");
+
+		try {
+			patientDao.addPatient(patient);
+		}
+		catch (RuntimeException e){
+			System.out.println("Não consegui Inserir");
+			try {
+				patientDao.removePatient(patient);
+			}
+			catch (RuntimeException f){
+				System.out.println("Não consegui remover");
+			}
+			System.out.println("Tentando de novo...");
+			patientDao.addPatient(patient);
+		}
+	}
+
+	@AfterClass
+	public static void setUpAfterClass() throws Exception {
+		PatientDao patientDao = new PatientDao();
+		Patient patient = new Patient();
+		patient.setCpf("10987654321");
+		patientDao.removePatient(patient);
 	}
 } 

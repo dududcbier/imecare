@@ -14,7 +14,7 @@ public class PatientDao {
 		this.conexao = ConnectionFactory.obterInstancia().obterConexao();
 	}
 
-	public void addPatient(Patient patient) throws SQLException {
+	public void addPatient(Patient patient) {
 		String sql = "insert into paciente "
 				+ "(cpf, tipo_sanguineo)" + " values (?,?)";
 
@@ -35,7 +35,7 @@ public class PatientDao {
 		
 	}	
 	
-	public void updatePatient(Patient patient)throws SQLException {
+	public void updatePatient(Patient patient){
 
 		PersonDao person = new PersonDao();
 		
@@ -53,7 +53,7 @@ public class PatientDao {
 		}
 	}
 	
-	public void removePatient(Patient patient) throws SQLException {
+	public void removePatient(Patient patient){
 
         PersonDao person = new PersonDao();
 			

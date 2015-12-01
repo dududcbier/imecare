@@ -2,7 +2,7 @@ package teste;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.*;
 import bd.PatientDao;
 import bd.RecordsDao;
 import modelo.Patient;
@@ -13,46 +13,46 @@ import java.util.*;
 
 public class TestPatient {
 
-	public int insertPatient(Patient patient) {
+	// public int insertPatient(Patient patient) {
 
-		PatientDao patDao = new PatientDao();
+	// 	PatientDao patDao = new PatientDao();
 		
-		try {
-			patDao.addPatient(patient);
-		}
+	// 	try {
+	// 		patDao.addPatient(patient);
+	// 	}
 
-		catch(SQLException e){
-			return -1;
-		}
-		return 0;
-	}
+	// 	catch(SQLException e){
+	// 		return -1;
+	// 	}
+	// 	return 0;
+	// }
 
 
-	private int editPatient(Patient patient){
-		PatientDao patDao = new PatientDao();
+	// private int editPatient(Patient patient){
+	// 	PatientDao patDao = new PatientDao();
 
-		try {
-			patDao.updatePatient(patient);
-		}
+	// 	try {
+	// 		patDao.updatePatient(patient);
+	// 	}
 
-		catch(SQLException e){
-			return -1;
-		}
-		return 0;
-	}
+	// 	catch(SQLException e){
+	// 		return -1;
+	// 	}
+	// 	return 0;
+	// }
 
-	private int deletePatient(Patient patient){
-		PatientDao patDao = new PatientDao();
+	// private int deletePatient(Patient patient){
+	// 	PatientDao patDao = new PatientDao();
 
-		try {
-			patDao.removePatient(patient);
-		}
+	// 	try {
+	// 		patDao.removePatient(patient);
+	// 	}
 
-		catch(SQLException e){
-			return -1;
-		}
-		return 0;
-	}
+	// 	catch(SQLException e){
+	// 		return -1;
+	// 	}
+	// 	return 0;
+	// }
 
 	@Test(expected=RuntimeException.class)
 	public void insertPatientEmptyCPF() {
@@ -61,7 +61,8 @@ public class TestPatient {
 		patient.setBloodType("B+");
 		patient.setCpf("");
 		
-		insertPatient(patient);
+		PatientDao patDao = new PatientDao();	
+		patDao.addPatient(patient);
 	}
 
 
@@ -69,10 +70,16 @@ public class TestPatient {
 	public void insertValidPatient() {
 
 		Patient patient = new Patient();
-		patient.setBloodType("A+");
 		patient.setCpf("10987654321");
-		
-		assertEquals("Must be able to insert", 0, insertPatient(patient));
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("O+");
+
+		PatientDao patDao = new PatientDao();	
+		patDao.addPatient(patient);
 	}
 
 
@@ -84,8 +91,8 @@ public class TestPatient {
 		patient.setBloodType("B+");
 		patient.setCpf("10987654321");
 
-		assertEquals("Must not be able to insert", -1, insertPatient(patient));
-
+		PatientDao patDao = new PatientDao();
+		patDao.addPatient(patient);
 	}
 
 
@@ -96,9 +103,10 @@ public class TestPatient {
 		patient.setBloodType("A+");
 		patient.setCpf("10987654321");
 		
-		insertPatient(patient);
+		PatientDao patDao = new PatientDao();	
+		patDao.addPatient(patient);
 		
-		editPatient(patient);
+		patDao.updatePatient(patient);
 
 	}
 
@@ -113,7 +121,10 @@ public class TestPatient {
 		patient.setBloodType("AB+");
 		patient.setCpf("10987654399");
 
-	    editPatient(patient);
+	   	PatientDao patDao = new PatientDao();	
+		patDao.addPatient(patient);
+		
+		patDao.updatePatient(patient);
 
 	}
 
@@ -124,8 +135,8 @@ public class TestPatient {
 		patient.setCpf("10987654321");
 		patient.setBloodType("O+");
 
-		deletePatient(patient);
-		assertEquals("Must be able to delete", 0, deletePatient(patient));
+		PatientDao patDao = new PatientDao();	
+		patDao.removePatient(patient);
 
 
 	}
@@ -140,9 +151,44 @@ public class TestPatient {
 		patient.setCpf("00000000001");
 		patient.setBloodType("O+");
 		
- 		deletePatient(patient);
- 		assertEquals("Must not be able to delete", -1, deletePatient(patient));
+ 		PatientDao patDao = new PatientDao();	
+		patDao.removePatient(patient);
+	}
 
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		PatientDao patientDao = new PatientDao();
+		Patient patient = new Patient();
+		patient.setCpf("10987654321");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("O+");
+
+		try {
+			patientDao.addPatient(patient);
+		}
+		catch (RuntimeException e){
+			System.out.println("Não consegui Inserir");
+			try {
+				patientDao.removePatient(patient);
+			}
+			catch (RuntimeException f){
+				System.out.println("Não consegui remover");
+			}
+			System.out.println("Tentando de novo...");
+			patientDao.addPatient(patient);
+		}
+	}
+
+	@AfterClass
+	public static void setUpAfterClass() throws Exception {
+		PatientDao patientDao = new PatientDao();
+		Patient patient = new Patient();
+		patient.setCpf("10987654321");
+		patientDao.removePatient(patient);
 	}
 
 } 

@@ -8,10 +8,12 @@ import bd.DiagnosedDiseaseDao;
 import bd.PrescreveDao;
 import bd.RecordsDao;
 import bd.PersonDao;
+import bd.PatientDao;
 import modelo.Schedule;
 import modelo.DiagnosedDisease;
 import modelo.Prescreve;
 import modelo.Records;
+import modelo.Patient;
 import modelo.Person;
 import java.sql.*;
 import java.util.*;
@@ -439,61 +441,41 @@ public class TestProfileStateChart {
 		personDao.updateUser(person);
 	}
 
-	// Esse teste (abaixo) deveria dar Runtime Error. Não faz sentido
-	// uma pessoa não ter um nome e o database não deveria permitir isso.
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		PatientDao patientDao = new PatientDao();
+		Patient patient = new Patient();
+		patient.setCpf("10987654321");
+		patient.setName("Patient");
+		patient.setEmail("patient@patient.com.br");
+		patient.setAddress("Rua dos patients, 123");
+		patient.setBirthDate(Calendar.getInstance());
+		patient.setRg("987654321");
+		patient.setBloodType("O+");
 
-	@Test(expected=RuntimeException.class)
-	public void editInvalidNameValidUser() {
-
-		Person person = new Person();
-		person.setName("");
-		person.setEmail("mac439@ime.usp.br");
-		person.setAddress("R. do Matão, 1010");
-		person.setBirthDate(Calendar.getInstance());
-		person.setRg("115345151");
-		person.setCpf("11534515125");
-
-		PersonDao personDao = new PersonDao();
-		personDao.updateUser(person);
-	}
-
-	// Esse teste (abaixo) deveria dar Runtime Error. Não faz sentido
-	// uma pessoa ter um email vazio (se for pra ter um email vazio, 
-	// a entrada deveria ser deletada) e o database não deveria permitir 
-	// isso.
-
-	@Test(expected=RuntimeException.class)
-	public void editInvalidEmailValidUser() {
-
-		Person person = new Person();
-		person.setName("Nome");
-		person.setEmail("");
-		person.setAddress("R. do Matão, 1010");
-		person.setBirthDate(Calendar.getInstance());
-		person.setRg("115345151");
-		person.setCpf("11534515125");
-
-		PersonDao personDao = new PersonDao();
-		personDao.updateUser(person);
-	}	
-
-	@Test
-	public void editValidEmailValidUser() {
-
-		Person person = new Person();
-		person.setName("Nome");
-		person.setEmail("abc@usp.br");
-		person.setAddress("R. do Matão, 1010");
-		person.setBirthDate(Calendar.getInstance());
-		person.setRg("115345151");
-		person.setCpf("11534515125");
-
-		PersonDao personDao = new PersonDao();
-		personDao.updateUser(person);
+		try {
+			patientDao.addPatient(patient);
+		}
+		catch (RuntimeException e){
+			System.out.println("Não consegui Inserir");
+			try {
+				patientDao.removePatient(patient);
+			}
+			catch (RuntimeException f){
+				System.out.println("Não consegui remover");
+			}
+			System.out.println("Tentando de novo...");
+			patientDao.addPatient(patient);
+		}
 	}
 
 	@AfterClass
 	public static void setUpAfterClass() throws Exception {
+		PatientDao patientDao = new PatientDao();
+		Patient patient = new Patient();
+		patient.setCpf("10987654321");
+		patientDao.removePatient(patient);
+
 		PersonDao personDao = new PersonDao();
 		Person person = new Person();
 
