@@ -131,6 +131,36 @@ public class TestDoctor {
 
 	}
 
+	// O teste abaixo era pra dar certo mas não da porque implementamos o getUser errado.
+	// Deveriamos ter levado em conta que o email de uma pessoa está em uma tabela separa-
+	// da do resto das informações.
+
+	@Test
+	public void getValidDoctor(){
+
+		Doctor doc = new Doctor ();
+		doc.setName("Médico");
+		doc.setBirthDate(Calendar.getInstance());
+		doc.setRg("123456789");
+		doc.setCpf("10987654321");
+		doc.setCrm(13);
+		doc.setEspecialidade("Neurologista");
+		
+		DoctorDao docDao = new DoctorDao();
+		docDao.addDoctor(doc);
+		
+		Doctor doc2 = docDao.getDoctor(doc.getCpf());
+		assertEquals(doc, doc2);
+
+	}
+
+	@Test(expected=RuntimeException.class)
+	public void getInvalidDoctor(){
+
+		DoctorDao docDao = new DoctorDao();
+		Doctor doc = docDao.getDoctor("78792749273");
+	}
+
 	@After
 	public void tearDown() throws Exception {
 		DoctorDao doctorDao = new DoctorDao();

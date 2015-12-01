@@ -77,7 +77,6 @@ public class PersonDao {
 
 				person.setCpf(cpf);
 				person.setName(rs.getString("nome"));
-				person.setAddress(rs.getString("endereco"));
 				person.setEmail(rs.getString("email"));
 
 				Calendar date = Calendar.getInstance();

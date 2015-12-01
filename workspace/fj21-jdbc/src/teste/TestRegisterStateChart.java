@@ -15,6 +15,7 @@ import java.util.*;
 public class TestRegisterStateChart {
 
 	// User já foi testado em Test Profile State Chart
+	// Patient já foi testado em Test Patient
 
 	@Test
 	public void insertValidDoctor() {
