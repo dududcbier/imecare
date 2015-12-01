@@ -154,11 +154,24 @@ public class TestDoctor {
 
 	}
 
-	@Test(expected=RuntimeException.class)
+	// O teste abaixo era pra dar certo mas não da porque implementamos o getUser errado.
+	// Deveriamos ter levado em conta que o email de uma pessoa está em uma tabela separa-
+	// da do resto das informações.
+
+	@Test
 	public void getInvalidDoctor(){
 
 		DoctorDao docDao = new DoctorDao();
 		Doctor doc = docDao.getDoctor("78792749273");
+
+		assertEquals(doc, null);
+	}
+
+	@Test(expected=RuntimeException.class)
+	public void getEmptyCpfDoctor(){
+
+		DoctorDao docDao = new DoctorDao();
+		Doctor doc = docDao.getDoctor(null);
 	}
 
 	@After
