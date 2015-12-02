@@ -153,7 +153,7 @@ public class TestDoctor {
 	// Deveriamos ter levado em conta que o email de uma pessoa está em uma tabela separa-
 	// da do resto das informações.
 
-	@Test
+	@Test(expected=RuntimeException.class) 
 	public void getInvalidDoctor(){
 
 		Doctor doc = docDao.getDoctor("78792749273");
