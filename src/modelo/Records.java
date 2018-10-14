@@ -18,23 +18,6 @@ public class Records {
 	private String examName = "";
 	private String examDescription = "";
 
-    /*List<Sympton> sympton = new ArrayList<Sympton>();
-    Sympton sympton = new Sympton();
-               
-    //adiciona um record a nossa lista
-    record.add(record);
-     
-    //adiciona um record a uma posição exata da lista
-    sympton.add(id, sympton);
-
-    public String getSympton(int idPatient){
-		return sympton.get(idPatient);
-	}
-
-	public void setSympton(String sympton){
-		this.sympton = sympton;
-	}*/
-
 
     public String getType(){
 		return type;
