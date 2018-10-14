@@ -182,17 +182,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-/*CREATE OR REPLACE FUNCTION PacienteInexistente()
-	RETURNS TRIGGER AS $$
-BEGIN
-	IF(NEW.cpf = null) THEN
-	 	RETURN NULL;
-	END IF;	
-	RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-*/
-
 
 CREATE TRIGGER InsereProntuario
 INSTEAD OF INSERT OR UPDATE ON  prontuario
@@ -200,19 +189,4 @@ FOR EACH ROW
 EXECUTE PROCEDURE PacienteInexistente();
 
 
-
-
-/*CREATE OR REPLACE FUNCTION InsercaoProntuario()
-RETURNS TRIGGER AS $$
-BEGIN
-
- insert into prontuario values ('A+', 'Joao', '12345678', '31421', 'Diabetes', 'Sede', 'Sensacao constante de sede', 'Insulon', 
- 	'vermelha', 2353, 'Exame de sangue', 'Será analisada a taxa de glicemia no sangue');
-	RETURN NEW;
-
-	RETURN NULL;$
-BEGIN
-END;
-$$ LANGUAGE plpgsql;
-*/
 
